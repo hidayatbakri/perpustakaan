@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Perpustakaan SMPN 1 Bontonompo</title>
-    <link rel="stylesheet" href="./src/css/style.css">
-    <link rel="stylesheet" href="./src/css/landingpage.css">
+    <link rel="stylesheet" href="./src/css/style.css?v=<?php echo time()?>">
+    <link rel="stylesheet" href="./src/css/landingpage.css?v=<?php echo time()?>">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link href="./src/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ">
+    <link href="./src/bootstrap/css/bootstrap.min.css?v=<?php echo time()?>" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg top py-3">
@@ -149,10 +149,9 @@
       <h6 class="text-center">Created by. SMPN 1 Bontonompo &copy; 2023</h6>
     </footer>
     <script src="./src/js/jQuery.min.js"></script>
-    <script src="./src/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"></script>
+    <script src="./src/bootstrap/js/bootstrap.bundle.min.js" ></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
       const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
