@@ -1,0 +1,39 @@
+.navbar-brand {
+  line-height: 24px;
+}
+
+.mytext-primary {
+  color: #03045e !important;
+}
+
+.nav-link {
+  color: rgb(233, 233, 233) !important;
+}
+
+section.header {
+  min-height: 85vh;
+  background-color: #03045e !important;
+}
+
+section.header h1 {
+  font-weight: 400;
+}
+
+section.header .mybtn {
+  width: 160px;
+  font-size: 18px;
+}
+
+.icon-layanan {
+  min-width: 40px !important;
+  min-height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+  border-radius: 150px;
+}
+
+.img-layanan {
+  width: 430px !important;
+  object-fit: cover;
+  height: 250px !important;
+}
