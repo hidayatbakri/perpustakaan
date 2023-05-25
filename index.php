@@ -5,45 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Perpustakaan SMPN 1 Bontonompo</title>
     <link rel="stylesheet" href="./src/css/style.css">
-    <link rel="stylesheet" href="./src/css/lpage.css">
+    <link rel="stylesheet" href="./src/css/landingpage.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link href="./src/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ">
   </head>
   <body>
-    <section class="header">
-      <nav class="navbar navbar-expand-lg bg-transparent py-3">
-        <div class="container">
-          <img class="me-3" src="./assets/logo/LOGO-TUT-WURI-handayani.png" alt="logo1" width="60">
-          <a class="navbar-brand text-white" href="#">SMP NEGRI 1 <br><b class="text-white">Bontonompo</b></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link mx-3 active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link mx-3" href="#">Tentang</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link mx-3" href="#">Buku</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link mx-3 px-4 bg-primary text-white rounded-2" href="#">Masuk</a>
-              </li>
-            </ul>
-          </div>
+    <nav class="navbar navbar-expand-lg top py-3">
+      <div class="container">
+        <img class="me-3" src="./assets/logo/LOGO-TUT-WURI-handayani.png" alt="logo1" width="60">
+        <a class="navbar-brand text-white" href="#">SMP NEGRI 1 <br><b class="text-white">Bontonompo</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link mx-3" aria-current="page" href="#header">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-3" href="#layanan">Layanan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-3" href="#populer">Populer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-3" href="buku.php">Buku</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link masuk mx-3 px-4 bg-primary text-white rounded-2" href="login.php">Masuk</a>
+            </li>
+          </ul>
         </div>
-      </nav>
-      <div class="container mt-3 d-flex align-items-center h-100">
+      </div>
+    </nav>
+    <section class="header" id="header">
+      <div class="container d-flex align-items-center h-100">
         <div class="row ">
           <div class="col-md-6 col-sm-12  d-flex justify-content-center flex-column">
             <h1 class="text-white" data-aos="fade-right" data-aos-duration="2000">Perpustakaan SMP Negri 1 <b class="text-white">Bontonompo</b></h1>
             <p class="pt-4 text-white" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200">Menggali Potensi Pengetahuan: Jelajahi Sistem Informasi Perpustakaan SMP Negri 1 Bontonompo</p>
             <div>
-              <a href="#" class="mt-4 me-3 py-2 btn btn-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000">Masuk</a>
+              <a href="login.php" class="mt-4 me-3 py-2 btn btn-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000">Masuk</a>
               <a href="#" class="mt-4 py-2 btn btn-outline-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="100">Cari Buku</a>
             </div>
           </div>
@@ -72,7 +75,7 @@
         </div>
       </div>
     </section>
-    <section class="layanan py-5">
+    <section class="layanan py-5" id="layanan">
       <div class="container mt-5">
         <div class="row">
           <div class="col-md-6 col-sm-12 d-flex align-items-center justify-content-center">
@@ -113,12 +116,58 @@
         </div>
       </div>
     </section>
+    <section class="populer py-5" id="populer">
+      <div class="container">
+        <h3 class="mytext-primary fw-bold text-center" data-aos="zoom-in-right" data-aos-duration="1000">Populer</h3>  
+        <h5 class="text-secondary bold text-center" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="50">Buku paling populer</h5>  
+          
+        <div class="d-flex justify-content-center flex-wrap">
+          <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buku Bahasa Indonesia">
+            <a href="">
+              <img class="img-fluid img-buku-populer rounded-2" src="./assets/img/Kelas-9-Buku-Siswa-Bahasa-Indonesia.jpg" alt="buku-populer">
+            </a>
+          </div>
+          <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buku Bahasa Indonesia">
+            <a href="">
+              <img class="img-fluid img-buku-populer rounded-2" src="./assets/img/Kelas-9-Buku-Siswa-Bahasa-Indonesia.jpg" alt="buku-populer">
+            </a>
+          </div>
+          <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buku Bahasa Indonesia">
+            <a href="">
+              <img class="img-fluid img-buku-populer rounded-2" src="./assets/img/Kelas-9-Buku-Siswa-Bahasa-Indonesia.jpg" alt="buku-populer">
+            </a>
+          </div>
+          <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buku Bahasa Indonesia">
+            <a href="">
+              <img class="img-fluid img-buku-populer rounded-2" src="./assets/img/Kelas-9-Buku-Siswa-Bahasa-Indonesia.jpg" alt="buku-populer">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="bg-white py-3">
+      <h6 class="text-center">Created by. SMPN 1 Bontonompo &copy; 2023</h6>
+    </footer>
+    <script src="./src/js/jQuery.min.js"></script>
     <script src="./src/bootstrap/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
       AOS.init({
         once: true,
       });
+
+      $(window).scroll(function () {
+        let wScroll = $(this).scrollTop();
+        if(wScroll >= 315){
+          $('nav').addClass('sticky-top')
+        }else{
+          $('nav').removeClass('sticky-top')
+        }
+      })
     </script>
   </body>
 </html>

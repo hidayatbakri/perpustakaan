@@ -2,6 +2,24 @@
   line-height: 24px;
 }
 
+nav.top {
+  background-color: #03045e;
+}
+
+nav.sticky-top {
+  background-color: white !important;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, .3);
+}
+
+nav.sticky-top a,
+nav.sticky-top b {
+  color: #353E60 !important;
+}
+
+nav.sticky-top li a.masuk {
+  color: white !important;
+}
+
 .mytext-primary {
   color: #03045e !important;
 }
@@ -36,4 +54,25 @@ section.header .mybtn {
   width: 430px !important;
   object-fit: cover;
   height: 250px !important;
+}
+
+.card-buku {
+  max-width: 300px;
+}
+
+.img-buku-populer {
+  object-fit: cover;
+  max-height: 280px;
+  width: 100%;
+  transition: .5s ease-in-out;
+}
+
+.img-buku-populer:hover {
+  transform: translateY(-10px);
+}
+
+footer {
+  box-shadow: 0 -2px 3px rgba(0, 0, 0, .2);
+  margin-top: 200px;
+
 }
