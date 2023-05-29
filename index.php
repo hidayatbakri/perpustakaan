@@ -40,7 +40,7 @@
       </div>
     </nav>
     <section class="header" id="header">
-      <div class="container d-flex align-items-center h-100">
+      <div class="container d-flex align-items-center h-100 pt-5">
         <div class="row ">
           <div class="col-md-6 col-sm-12  d-flex justify-content-center flex-column">
             <h1 class="text-white" data-aos="fade-right" data-aos-duration="2000">Perpustakaan SMP Negri 1 <b class="text-white">Bontonompo</b></h1>
