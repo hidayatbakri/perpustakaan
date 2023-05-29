@@ -31,7 +31,7 @@
             <div class="row align-items-center py-3">
                 <div class="header-text mb-4">
                     <h3>Selamat datang</h3>
-                    <p>Silahkan isi formulir untuk masuk</p>
+                    <p>Silahkan isi formulir untuk masuk.</p>
                 </div>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email Address">
