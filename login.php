@@ -52,7 +52,7 @@
             <button type="submit" class="btn btn-primary btn-lg w-100 fs-6">Masuk</button>
           </div>
           <div class="input-group mb-2">
-            <button type="submit" class="btn btn-light btn-lg w-100 fs-6">Daftar</button>
+            <a href="register.php" class="btn btn-light btn-lg w-100 fs-6">Daftar</a>
           </div>
         </div>
       </div>
