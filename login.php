@@ -77,9 +77,6 @@ if( isset($_POST["login"]) ) {
             <?php if( isset($error) ) : ?>
               <p style=":color: red; font-style: italic;">email / password salah</p>
             <?php endif; ?>
-            <!-- <div class="input-group mb-5">
-              <small><a href="#" class="text-decoration-none">Lupa Password?</a></small>
-            </div> -->
             <div class="input-group mb-3">
               <button type="submit" name="login" class="btn btn-primary btn-lg w-100 fs-6">Masuk</button>
             </div>
