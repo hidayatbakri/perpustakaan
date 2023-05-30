@@ -1,3 +1,29 @@
+<?php 
+require 'koneksi.php';
+if( isset($_POST["login"]) ) {
+
+  $email = $_POST["email"];
+  $password = $_POST["password"];
+
+  $result = mysqli_query($con, "SELECT * FROM tbl_login WHERE 
+      email = '$email'");
+
+  //cek email
+  if( mysqli_num_rows($result) === 1 ) {
+
+      //cek password
+      $row = mysqli_fetch_assoc($result);
+      if(password_verify($password, $row["password"]) ) {
+        header("Loaction: login.php");
+        exit;
+      }
+  }
+
+  $error = true;
+} 
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -5,6 +31,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Halaman Login</title>
+
+  
   <link rel="stylesheet" href="./src/css/style.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="./src/css/login.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -35,27 +63,29 @@
       <!-- --------- right box ----------  -->
       <div class="col-md-6 right-box">
         <div class="row align-items-center py-3">
-          <div class="header-text mb-4">
-            <h3>Selamat datang</h3>
-            <p>Silahkan isi formulir untuk masuk.</p>
-          </div>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email Address">
-          </div>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
-          </div>
-          <div class="input-group mb-5">
-            <small><a href="#" class="text-decoration-none">Lupa Password?</a></small>
-          </div>
-          <div class="input-group mb-3">
-            <button type="submit" class="btn btn-primary btn-lg w-100 fs-6">Masuk</button>
-          </div>
-          <div class="input-group mb-2">
-            <a href="register.php" class="btn btn-light btn-lg w-100 fs-6">Daftar</a>
+          <form action="" method="post">
+            <div class="header-text mb-4">
+              <h3>Selamat datang</h3>
+              <p>Silahkan isi formulir untuk masuk.</p>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email Address">
+            </div>
+            <div class="input-group mb-5">
+              <input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
+            </div>
+            <?php if( isset($error) ) : ?>
+              <p style=":color: red; font-style: italic;">email / password salah</p>
+            <?php endif; ?>
+            <div class="input-group mb-3">
+              <button type="submit" name="login" class="btn btn-primary btn-lg w-100 fs-6">Masuk</button>
+            </div>
+            <div class="input-group mb-2">
+              <button type="submit" class="btn btn-light btn-lg w-100 fs-6">Daftar</button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </body>
