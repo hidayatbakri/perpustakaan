@@ -1,3 +1,21 @@
+<?php
+require '../koneksi.php';
+session_start();
+if (!isset($_SESSION['login'])) {
+  header("Location: /perpustakaan/login.php");
+  exit;
+}
+
+$nip = $_SESSION['id'];
+$result = mysqli_query($con, "SELECT * FROM tbl_staff WHERE nip = '$nip'");
+
+if (mysqli_num_rows($result) === 1) {
+  $staff = mysqli_fetch_assoc($result);
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,9 +25,6 @@
   <title><?= $title; ?></title>
   <link rel="stylesheet" href="../assets/css/main/app.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="../assets/css/main/app-dark.css?v=<?php echo time() ?>">
-  <!-- <link rel="shortcut icon" href="../assets/images/logo/favicon.svg" type="image/x-icon">
-  <link rel="shortcut icon" href="../assets/images/logo/favicon.png" type="image/png"> -->
-
   <link rel="stylesheet" href="../assets/css/shared/iconly.css?v=<?php echo time() ?>">
 
 </head>
@@ -21,7 +36,7 @@
         <div class="sidebar-header position-relative">
           <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
-              <a href="index.html"><img src="../assets/logo/logosekolah.png" alt="Logo" class="img-fluid h-100" width="300px" style="object-fit: cover;"></a>
+              <a href="index.html"><img src="../assets/logo/logosekolah1.png" alt="Logo" class="img-fluid h-100" width="300px" style="object-fit: cover;"></a>
             </div>
             <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -63,19 +78,29 @@
                 <span>Staff</span>
               </a>
             </li>
-            <li class="sidebar-item <?= $active == 'pengaturan' ? 'active' : ''; ?>">
-              <a href="index.html" class='sidebar-link'>
-                <i class="bi bi-gear-fill"></i>
-                <span>Pengaturan</span>
+            <li class="sidebar-item <?= $active == 'profile' ? 'active' : ''; ?>">
+              <a href="profile.php" class='sidebar-link'>
+                <i class="bi bi-person-fill"></i>
+                <span>Profil</span>
               </a>
             </li>
 
             <li class="sidebar-title">Siswa &amp; Kelas</li>
-            <li class="sidebar-item  <?= $active == 'siswa' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/siswa.php" class='sidebar-link'>
+            <li class="sidebar-item <?= $active == 'siswa' ? 'active' : ''; ?> has-sub">
+              <a href="#" class='sidebar-link'>
                 <i class="bi bi-file-earmark-medical-fill"></i>
-                <span>Data Siswa</span>
+                <span>Siswa</span>
               </a>
+              <ul class="submenu ">
+                <li class="submenu-item ">
+                  <a href="component-alert.html">Data Siswa</a>
+                </li>
+                <li class="submenu-item ">
+                  <a href="component-badge.html">Verifikasi Siswa</a>
+                </li>
+              </ul>
+            </li>
+            <li class="sidebar-item  <?= $active == 'siswa' ? 'active' : ''; ?>">
             </li>
             <li class="sidebar-item  <?= $active == 'kelas' ? 'active' : ''; ?>">
               <a href="table.html" class='sidebar-link'>
@@ -102,7 +127,7 @@
             <li class="sidebar-title">Lanjutan</li>
 
             <li class="sidebar-item  ">
-              <a href="application-email.html" class='text-danger sidebar-link'>
+              <a href="/perpustakaan/logout.php" onclick="confirm('Apakah anda yakin?')" class='text-danger sidebar-link'>
                 <i class="bi bi-door-open-fill text-danger"></i>
                 <span>Keluar</span>
               </a>

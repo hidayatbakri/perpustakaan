@@ -1,26 +1,34 @@
-<?php 
+<?php
 require 'koneksi.php';
-if( isset($_POST["login"]) ) {
+session_start();
+if (isset($_POST["login"])) {
 
-  $email = $_POST["email"];
-  $password = $_POST["password"];
+  $email = htmlspecialchars($_POST["email"]);
+  $password = htmlspecialchars($_POST["password"]);
 
   $result = mysqli_query($con, "SELECT * FROM tbl_login WHERE 
       email = '$email'");
 
   //cek email
-  if( mysqli_num_rows($result) === 1 ) {
+  if (mysqli_num_rows($result) === 1) {
 
-      //cek password
-      $row = mysqli_fetch_assoc($result);
-      if(password_verify($password, $row["password"]) ) {
-        header("Loaction: login.php");
-        exit;
+    //cek password
+    $row = mysqli_fetch_assoc($result);
+    if (password_verify($password, $row["password"])) {
+
+      if ($row['level'] == 'siswa') {
+        echo "<script>document.location.href='/perpustakaan/siswa'</script>";
+      } elseif ($row['level'] == 'staff') {
+        $_SESSION['login'] = true;
+        $_SESSION['id'] = $row['id_anggota'];
+        echo "<script>document.location.href='/perpustakaan/staff'</script>";
       }
+      exit;
+    }
   }
 
   $error = true;
-} 
+}
 ?>
 
 
@@ -32,12 +40,13 @@ if( isset($_POST["login"]) ) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Halaman Login</title>
 
-  
+
   <link rel="stylesheet" href="./src/css/style.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="./src/css/login.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   <link href="./src/bootstrap/css/bootstrap.min.css?v=<?php echo time() ?>" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -57,7 +66,7 @@ if( isset($_POST["login"]) ) {
           <img src="./assets/illustration/computer_illustration_1.png" alt="" class="img-fluid" style="width: 250px;">
         </div>
         <p class="text-white fs-2" style="font-family: 'courirer New', Courier, monospace; font-weight: 600;">Halaman Login</p>
-        <small class="text-white text-wrap text-center" style="width :17rem; font-family: 'Courier New', ">Sistem informasi perpustakaan SMPN 1 Bontonompo</small>
+        <small class="text-white text-wrap text-center" style="width :17rem; font-family: 'Courier New', ">Sistem informasi perpustakaan SMAN 3 Gowa</small>
       </div>
 
       <!-- --------- right box ----------  -->
@@ -74,20 +83,27 @@ if( isset($_POST["login"]) ) {
             <div class="input-group mb-5">
               <input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
             </div>
-            <?php if( isset($error) ) : ?>
-              <p style=":color: red; font-style: italic;">email / password salah</p>
-            <?php endif; ?>
             <div class="input-group mb-3">
               <button type="submit" name="login" class="btn btn-primary btn-lg w-100 fs-6">Masuk</button>
             </div>
             <div class="input-group mb-2">
-              <button type="submit" class="btn btn-light btn-lg w-100 fs-6">Daftar</button>
+              <a href="/perpustakaan/register.php" class="btn btn-light btn-lg w-100 fs-6">Daftar</a>
             </div>
-          </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   </div>
+
+  <?php if (isset($error)) : ?>
+    <script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Email atau password salah!',
+      })
+    </script>
+  <?php endif; ?>
 </body>
 
 </html>
