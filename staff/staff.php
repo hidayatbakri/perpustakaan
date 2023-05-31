@@ -1,6 +1,5 @@
 <?php
-global $active, $title;
-$title = "Staff - Perpustakaan SMPN 1 Bontonompo";
+$title = "Staff - Perpustakaan SMAN 3 Gowa";
 $active = "staff";
 include 'template/header.php';
 ?>

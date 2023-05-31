@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Perpustakaan SMPN 1 Bontonompo</title>
+  <title>Perpustakaan SMAN 3 Gowa</title>
   <link rel="stylesheet" href="./src/css/style.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="./src/css/landingpage.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -16,7 +16,7 @@
   <nav class="navbar navbar-expand-lg top py-3">
     <div class="container">
       <img class="me-3" src="./assets/logo/LOGO-TUT-WURI-handayani.png" alt="logo1" width="60">
-      <a class="navbar-brand text-white" href="#">SMP NEGERI 1 <br><b class="text-white">Bontonompo</b></a>
+      <a class="navbar-brand text-white" href="#">SMA NEGERI 3 <br><b class="text-white">Gowa</b></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -45,8 +45,8 @@
     <div class="container d-flex align-items-center h-100 pt-5">
       <div class="row ">
         <div class="col-md-6 col-sm-12  d-flex justify-content-center flex-column">
-          <h1 class="text-white" data-aos="fade-right" data-aos-duration="2000">Perpustakaan SMP Negeri 1 <b class="text-white">Bontonompo</b></h1>
-          <p class="pt-4 text-white" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200">Menggali Potensi Pengetahuan: Jelajahi Sistem Informasi Perpustakaan SMP Negeri 1 Bontonompo</p>
+          <h1 class="text-white" data-aos="fade-right" data-aos-duration="2000">Perpustakaan SMA Negeri 3 <b class="text-white">Gowa</b></h1>
+          <p class="pt-4 text-white" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200">Menggali Potensi Pengetahuan: Jelajahi Sistem Informasi Perpustakaan SMA Negeri 3 Gowa</p>
           <div>
             <a href="login.php" class="mt-4 me-3 py-2 btn btn-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000">Masuk</a>
             <a href="#" class="mt-4 py-2 btn btn-outline-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="100">Cari Buku</a>

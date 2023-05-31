@@ -1,8 +1,17 @@
 <?php
-global $active, $title;
-$title = "Dashboard - Perpustakaan SMPN 1 Bontonompo";
+$title = "Dashboard - Perpustakaan SMAN 3 Gowa";
 $active = "dashboard";
 include 'template/header.php';
+
+$peminjaman = mysqli_query($con, 'SELECT count(*) as total FROM tbl_peminjaman WHERE status = "tidak"');
+$peminjaman = mysqli_fetch_assoc($peminjaman);
+$totalpeminjaman = mysqli_query($con, 'SELECT count(*) as total FROM tbl_peminjaman');
+$totalpeminjaman = mysqli_fetch_assoc($totalpeminjaman);
+$siswa = mysqli_query($con, 'SELECT count(*) as total FROM tbl_siswa');
+$siswa = mysqli_fetch_assoc($siswa);
+$totalstaff = mysqli_query($con, 'SELECT count(*) as total FROM tbl_staff');
+$totalstaff = mysqli_fetch_assoc($totalstaff);
+
 ?>
 
 
@@ -31,7 +40,7 @@ include 'template/header.php';
                 </div>
                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                   <h6 class="text-muted font-semibold">Peminjam</h6>
-                  <h6 class="font-extrabold mb-0">10</h6>
+                  <h6 class="font-extrabold mb-0"><?= $peminjaman['total']; ?></h6>
                 </div>
               </div>
             </div>
@@ -48,7 +57,7 @@ include 'template/header.php';
                 </div>
                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                   <h6 class="text-muted font-semibold">Siswa</h6>
-                  <h6 class="font-extrabold mb-0">100</h6>
+                  <h6 class="font-extrabold mb-0"><?= $siswa['total']; ?></h6>
                 </div>
               </div>
             </div>
@@ -65,7 +74,7 @@ include 'template/header.php';
                 </div>
                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                   <h6 class="text-muted font-semibold">Staff</h6>
-                  <h6 class="font-extrabold mb-0">20</h6>
+                  <h6 class="font-extrabold mb-0"><?= $totalstaff['total']; ?></h6>
                 </div>
               </div>
             </div>
@@ -82,7 +91,7 @@ include 'template/header.php';
                 </div>
                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                   <h6 class="text-muted font-semibold">Total Pinjaman</h6>
-                  <h6 class="font-extrabold mb-0">50</h6>
+                  <h6 class="font-extrabold mb-0"><?= $totalpeminjaman['total']; ?></h6>
                 </div>
               </div>
             </div>
@@ -101,18 +110,7 @@ include 'template/header.php';
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h4>Siswa</h4>
-            </div>
-            <div class="card-body">
-              <div id="chart-visitors-profile"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
     <div class="col-12 col-lg-3">
       <div class="card">
@@ -122,8 +120,8 @@ include 'template/header.php';
               <img src="../assets/images/faces/1.jpg" alt="Face 1">
             </div>
             <div class="ms-3 name">
-              <h5 class="font-bold">Arman</h5>
-              <h6 class="text-muted mb-0">Staff</h6>
+              <h5 class="font-bold"><?= $staff['nama'] ?></h5>
+              <h6 class="text-muted mb-0"><?= $staff['nip'] ?></h6>
             </div>
           </div>
         </div>
