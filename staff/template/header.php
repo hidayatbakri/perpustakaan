@@ -2,7 +2,7 @@
 require '../koneksi.php';
 session_start();
 if (!isset($_SESSION['login'])) {
-  header("Location: /perpustakaan/login.php");
+  header("Location: /perpustakaan/login");
   exit;
 }
 
@@ -67,19 +67,19 @@ if (mysqli_num_rows($result) === 1) {
             <li class="sidebar-title">Menu</li>
 
             <li class="sidebar-item  <?= $active == 'dashboard' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/index.php" class='sidebar-link'>
+              <a href="/perpustakaan/staff/index" class='sidebar-link'>
                 <i class="bi bi-grid-fill"></i>
                 <span>Dashboard</span>
               </a>
             </li>
             <li class="sidebar-item <?= $active == 'staff' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/staff.php" class='sidebar-link'>
+              <a href="/perpustakaan/staff/staff" class='sidebar-link'>
                 <i class="bi bi-person-badge-fill"></i>
                 <span>Staff</span>
               </a>
             </li>
             <li class="sidebar-item <?= $active == 'profile' ? 'active' : ''; ?>">
-              <a href="profile.php" class='sidebar-link'>
+              <a href="profile" class='sidebar-link'>
                 <i class="bi bi-person-fill"></i>
                 <span>Profil</span>
               </a>
@@ -127,7 +127,7 @@ if (mysqli_num_rows($result) === 1) {
             <li class="sidebar-title">Lanjutan</li>
 
             <li class="sidebar-item  ">
-              <a href="/perpustakaan/logout.php" onclick="confirm('Apakah anda yakin?')" class='text-danger sidebar-link'>
+              <a href="/perpustakaan/logout" onclick="confirm('Apakah anda yakin?')" class='text-danger sidebar-link'>
                 <i class="bi bi-door-open-fill text-danger"></i>
                 <span>Keluar</span>
               </a>

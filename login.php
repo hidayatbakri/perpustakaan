@@ -87,7 +87,7 @@ if (isset($_POST["login"])) {
               <button type="submit" name="login" class="btn btn-primary btn-lg w-100 fs-6">Masuk</button>
             </div>
             <div class="input-group mb-2">
-              <a href="/perpustakaan/register.php" class="btn btn-light btn-lg w-100 fs-6">Daftar</a>
+              <a href="/perpustakaan/register" class="btn btn-light btn-lg w-100 fs-6">Daftar</a>
             </div>
           </form>
         </div>
