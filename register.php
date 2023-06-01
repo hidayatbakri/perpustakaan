@@ -78,7 +78,7 @@
                   <button type="submit" name="register" class="btn btn-primary btn-lg w-100 fs-6">Daftar</button>
                 </div>
                 <div class="input-group mb-2">
-                  <a href="login.php" class="btn btn-light btn-lg w-100 fs-6">Masuk</a>
+                  <a href="login" class="btn btn-light btn-lg w-100 fs-6">Masuk</a>
                 </div>
               </div>
             </div>
@@ -136,7 +136,7 @@ if (isset($_POST["register"])) {
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            document.location.href='/perpustakaan/login.php';
+            document.location.href='/perpustakaan/login';
           }
         })
       </script>";

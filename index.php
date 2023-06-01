@@ -32,10 +32,10 @@
             <a class="nav-link mx-3" href="#populer">Populer</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-3" href="buku.php">Buku</a>
+            <a class="nav-link mx-3" href="buku">Buku</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link masuk mx-3 px-4 bg-primary text-white rounded-2" href="login.php">Masuk</a>
+            <a class="nav-link masuk mx-3 px-4 bg-primary text-white rounded-2" href="login">Masuk</a>
           </li>
         </ul>
       </div>
@@ -48,7 +48,7 @@
           <h1 class="text-white" data-aos="fade-right" data-aos-duration="2000">Perpustakaan SMA Negeri 3 <b class="text-white">Gowa</b></h1>
           <p class="pt-4 text-white" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200">Menggali Potensi Pengetahuan: Jelajahi Sistem Informasi Perpustakaan SMA Negeri 3 Gowa</p>
           <div>
-            <a href="login.php" class="mt-4 me-3 py-2 btn btn-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000">Masuk</a>
+            <a href="login" class="mt-4 me-3 py-2 btn btn-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000">Masuk</a>
             <a href="#" class="mt-4 py-2 btn btn-outline-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="100">Cari Buku</a>
           </div>
         </div>
