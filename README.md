@@ -5,7 +5,7 @@
 Ini adalah sebuah aplikasi Sistem Informasi Perpustakaan berbasis web yang dirancang untuk mengelola dan mempermudah pengelolaan perpustakaan secara efisien. Aplikasi ini dibangun dengan menggunakan teknologi web seperti HTML, CSS, dan JavaScript, serta bahasa pemrograman server-side seperti PHP dan MySQL.
 
 ✨Tim Kami :
-- Hidayat Bakri (NIM : 20212205038) - Fullstack
+- Hidayat Bakri (NIM : 20212205038) - Full-stack
 - Rihla Reski (NIM : 20212205188) - Front-end
 - Muhammad Fadhil Asmar (NIM : 20212205100) - Back-end
 - Arman (NIM : 20212205049) - Front-end
