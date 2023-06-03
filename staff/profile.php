@@ -57,7 +57,7 @@ $profile = mysqli_fetch_assoc($profile);
                 </tbody>
               </table>
               <div class="d-flex justify-content-end">
-                <a href="#" class="btn btn-primary mt-5">Ubah Profil</a>
+                <a href="/perpustakaan/staff/editprofil" class="btn btn-primary mt-5">Ubah Profil</a>
               </div>
             </div>
           </div>
