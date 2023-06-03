@@ -145,7 +145,7 @@ if (isset($_POST["register"])) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Anda terjadi sebuah kesalahan!',
+        text: 'Terjadi sebuah kesalahan!',
       })
     </script>";
   }

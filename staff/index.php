@@ -167,4 +167,7 @@ $totalstaff = mysqli_fetch_assoc($totalstaff);
   </section>
 </div>
 <script src="../src/js/jQuery.min.js?v=<?php echo time() ?>"></script>
+<!-- Need: Apexcharts -->
+<script src="../assets/extensions/apexcharts/apexcharts.min.js?v=<?php echo time() ?>"></script>
+<script src="../assets/js/pages/dashboard.js?v=<?php echo time() ?>"></script>
 <?php include 'template/footer.php'; ?>
