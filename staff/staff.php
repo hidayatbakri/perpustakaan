@@ -2,6 +2,11 @@
 $title = "Staff - Perpustakaan SMAN 3 Gowa";
 $active = "staff";
 include 'template/header.php';
+$query = mysqli_query($con, "SELECT tbl_staff.nama, tbl_staff.nip, tbl_staff.alamat, tbl_staff.jk, tbl_login.email, tbl_login.level FROM tbl_staff, tbl_login WHERE tbl_login.level = 'staff' AND tbl_staff.nip = tbl_login.id_anggota");
+// $rows = mysqli_fetch_row($query);
+// var_dump(mysqli_fetch_row($query));
+
+
 ?>
 
 
@@ -39,21 +44,30 @@ include 'template/header.php';
                   </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    $i=1;
+                    while ($row = mysqli_fetch_assoc($query)) :
+                  ?>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Arman</td>
-                    <td>111</td>
-                    <td>Perempuan</td>
-                    <td>arman@mail.com</td>
-                    <td>Jl.Rumahdia</td>
+                    <th scope="row"><?= $i ?></th>
+                    <td><?= $row['nama'] ?></td>
+                    <td><?= $row['nip'] ?></td>
+                    <td><?= $row['jk'] ?></td>
+                    <td><?= $row['email'] ?></td>
+                    <td><?= $row['alamat'] ?></td>
                     <td>
                       <form action="" method="post">
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
+                        <input type="hidden" name="nip">
+                        <button type="submit" name="delete" onclick="confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
                         <a href="/perpustakaan/staff/editstaff" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
                         <a href="/perpustakaan/staff/editstaff" class="btn btn-info btn-sm"><i class="bi bi-eye-fill"></i></a>
                       </form>
                     </td>
                   </tr>
+                  <?php
+                    $i++;
+                    endwhile;
+                  ?>  
                 </tbody>
               </table>
             </div>
@@ -63,4 +77,35 @@ include 'template/header.php';
     </div>
   </section>
 </div>
-<?php include 'template/footer.php'; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<?php include 'template/footer.php'; 
+
+if (isset($_POST['delete'])) {
+  $nip=htmlspecialchars($_POST['nip']);
+  mysqli_query($con, "delete from tbl_staff WHERE nip='$nip'");
+  mysqli_query($con, "delete from tbl_login WHERE id_anggota='$nip'");
+
+  if(mysqli_affected_rows($con) > 0){
+    echo "<script>
+        Swal.fire({
+          title: 'Selamat berhasil menyimpan data',
+          confirmButtonText: 'Lanjut',
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            document.location.href='/perpustakaan/staff/staff';
+          }
+        })
+      </script>";
+  } else {
+    echo "<script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Terjadi sebuah kesalahan!',
+      })
+    </script>";
+  }
+}
+?>

@@ -88,10 +88,10 @@ if (isset($_POST['update'])) {
                   </div>
                   <div class="col-md-6">
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email" required>
+                      <input type="email" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email" required>
                     </div>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
+                      <input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
                     </div>
                   </div>
                   <div class="col-md-12">
@@ -122,4 +122,62 @@ if (isset($_POST['update'])) {
     </div>
   </section>
 </div>
-<?php include 'template/footer.php'; ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<?php include 'template/footer.php'; 
+
+
+if (isset($_POST['add'])) {
+  $id = htmlspecialchars($_POST["nip"]);
+  $nama = htmlspecialchars($_POST["nama"]);
+  $email = htmlspecialchars($_POST["email"]);
+  $password = htmlspecialchars($_POST["password"]);
+  $jk = htmlspecialchars($_POST["jk"]);
+  $alamat = htmlspecialchars($_POST["alamat"]);
+
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  $cekemail = mysqli_query($con, "SELECT * FROM tbl_login WHERE email = '$email' OR id_anggota = '$id'");
+
+  if (mysqli_num_rows($cekemail) === 1) {
+    echo "<script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Email atau nip sudah terdaftar!',
+      })
+    </script>";
+    exit;
+  }
+
+  $querysiswa = "INSERT INTO tbl_staff VALUES ('$id','$nama','$alamat','$jk')";
+  $querylogin = "INSERT INTO tbl_login (id_anggota, email, password, level) VALUES('$id', '$email', '$password', 'staff')";
+
+  $result1 = mysqli_query($con, $querylogin);
+  $result2 = mysqli_query($con, $querysiswa);
+
+  if ($result1) {
+    echo "<script>
+        Swal.fire({
+          title: 'Selamat berhasil menyimpan data',
+          confirmButtonText: 'Lanjut',
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            document.location.href='/perpustakaan/staff/staff';
+          }
+        })
+      </script>";
+  } else {
+    echo "<script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Terjadi sebuah kesalahan!',
+      })
+    </script>";
+  }
+}
+
+
+?>
+
