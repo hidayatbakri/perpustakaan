@@ -4,7 +4,7 @@ $active = "staff";
 include 'template/header.php';
 
 $nipsession = $_SESSION['id'];
-$profile = mysqli_query($con, "SELECT tbl_staff.nama, tbl_staff.nip, tbl_staff.alamat, tbl_staff.jk, tbl_login.email, tbl_login.level FROM tbl_staff, tbl_login WHERE tbl_staff.nip = '$nipsession' AND tbl_login.id_anggota = '$nip'");
+$profile = mysqli_query($con, "SELECT tbl_staff.nama, tbl_staff.nip, tbl_staff.alamat, tbl_staff.jk, tbl_login.email, tbl_login.level FROM tbl_staff, tbl_login WHERE tbl_staff.nip = '$nipsession' AND tbl_login.id_anggota = '$nipsession'");
 $profile = mysqli_fetch_assoc($profile);
 
 

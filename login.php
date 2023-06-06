@@ -1,6 +1,11 @@
 <?php
 require 'koneksi.php';
 session_start();
+
+if (isset($_SESSION['login'])) {
+  $_SESSION['level'] == 'staff' ? header("Location: /perpustakaan/staff") : header("Location: /perpustakaan/siswa");
+}
+
 if (isset($_POST["login"])) {
 
   $email = htmlspecialchars($_POST["email"]);
@@ -21,6 +26,7 @@ if (isset($_POST["login"])) {
       } elseif ($row['level'] == 'staff') {
         $_SESSION['login'] = true;
         $_SESSION['id'] = $row['id_anggota'];
+        $_SESSION['level'] = $row['level'];
         echo "<script>document.location.href='/perpustakaan/staff'</script>";
       }
       exit;

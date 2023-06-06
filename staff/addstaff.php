@@ -3,38 +3,39 @@ $title = "Tambah Staff - Perpustakaan SMAN 3 Gowa";
 $active = "staff";
 include 'template/header.php';
 
-if (isset($_POST['update'])) {
-  $nama = htmlspecialchars($_POST['nama']);
-  $email = htmlspecialchars($_POST['email']);
-  $jk = htmlspecialchars($_POST['jk']);
-  $alamat = htmlspecialchars($_POST['alamat']);
-  $password = htmlspecialchars($_POST['password']);
+if (isset($_POST['add'])) {
+  $id = htmlspecialchars($_POST["nip"]);
+  $nama = htmlspecialchars($_POST["nama"]);
+  $email = htmlspecialchars($_POST["email"]);
+  $password = htmlspecialchars($_POST["password"]);
+  $jk = htmlspecialchars($_POST["jk"]);
+  $alamat = htmlspecialchars($_POST["alamat"]);
 
-  if (strlen($password) > 0) {
-    $password = password_hash($password, PASSWORD_DEFAULT);
-    $queryStaff = "UPDATE tbl_staff SET
-              nama = '$nama',
-              alamat = '$alamat',
-              jk = '$jk' WHERE nip = '$nip'";
-    $queryLogin = "UPDATE tbl_login SET
-              email = '$email',
-              password = '$password' WHERE id_anggota = '$nip'";
-  } else {
-    $queryStaff = "UPDATE tbl_staff SET
-              nama = '$nama',
-              alamat = '$alamat',
-              jk = '$jk' WHERE nip = '$nip'";
-    $queryLogin = "UPDATE tbl_login SET
-              email = '$email'  WHERE id_anggota = '$nip'";
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  $cekemail = mysqli_query($con, "SELECT * FROM tbl_login WHERE email = '$email' OR id_anggota = '$id'");
+
+  if (mysqli_num_rows($cekemail) === 1) {
+    echo "<script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Email atau nis sudah terdaftar!',
+      })
+    </script>";
+    exit;
   }
 
-  mysqli_query($con, $queryStaff);
-  mysqli_query($con, $queryLogin);
+  $querysiswa = "INSERT INTO tbl_staff VALUES ('$id','$nama','$alamat','$jk')";
+  $querylogin = "INSERT INTO tbl_login (id_anggota, email, password, level) VALUES('$id', '$email', '$password', 'staff')";
 
-  if (mysqli_affected_rows($con)) {
+  $result1 = mysqli_query($con, $querylogin);
+  $result2 = mysqli_query($con, $querysiswa);
+
+  if ($result1) {
     echo "<script>
         Swal.fire({
-          title: 'Berhasil mengubah data',
+          title: 'Selamat anda berhasil mendaftar',
           confirmButtonText: 'Lanjut',
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
@@ -48,7 +49,7 @@ if (isset($_POST['update'])) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Gagal mengubah data!',
+        text: 'Terjadi sebuah kesalahan!',
       })
     </script>";
   }
@@ -88,10 +89,10 @@ if (isset($_POST['update'])) {
                   </div>
                   <div class="col-md-6">
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email" required>
+                      <input type="email" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email" required>
                     </div>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
+                      <input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
                     </div>
                   </div>
                   <div class="col-md-12">
