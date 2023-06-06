@@ -2,6 +2,8 @@
 $title = "Staff - Perpustakaan SMAN 3 Gowa";
 $active = "staff";
 include 'template/header.php';
+
+$rows = mysqli_query($con, "SELECT tbl_staff.nama, tbl_staff.nip, tbl_staff.alamat, tbl_staff.jk, tbl_login.email, tbl_login.level FROM tbl_staff, tbl_login WHERE tbl_staff.nip = tbl_login.id_anggota")
 ?>
 
 
@@ -39,21 +41,26 @@ include 'template/header.php';
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Arman</td>
-                    <td>111</td>
-                    <td>Perempuan</td>
-                    <td>arman@mail.com</td>
-                    <td>Jl.Rumahdia</td>
-                    <td>
-                      <form action="" method="post">
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
-                        <a href="/perpustakaan/staff/editstaff" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                        <a href="/perpustakaan/staff/editstaff" class="btn btn-info btn-sm"><i class="bi bi-eye-fill"></i></a>
-                      </form>
-                    </td>
-                  </tr>
+                  <?php $i = 1;
+                  while ($row = mysqli_fetch_assoc($rows)) : ?>
+                    <tr>
+                      <th scope="row"><?= $i; ?></th>
+                      <td><?= $row['nama'] ?></td>
+                      <td><?= $row['nip'] ?></td>
+                      <td><?= $row['jk'] ?></td>
+                      <td><?= $row['email'] ?></td>
+                      <td><?= $row['alamat'] ?></td>
+                      <td>
+                        <form action="" method="post">
+                          <input type="hidden" value="<?= $row['nip']; ?>" name="nip">
+                          <button type="submit" name="delete" onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
+                          <a href="/perpustakaan/staff/editstaff?nip=<?= $row['nip'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                          <a href="/perpustakaan/staff/detailstaff?nip=<?= $row['nip'] ?>" class="btn btn-info btn-sm"><i class="bi bi-eye-fill"></i></a>
+                        </form>
+                      </td>
+                    </tr>
+                  <?php $i++;
+                  endwhile; ?>
                 </tbody>
               </table>
             </div>
@@ -63,4 +70,43 @@ include 'template/header.php';
     </div>
   </section>
 </div>
-<?php include 'template/footer.php'; ?>
+<?php include 'template/footer.php';
+
+if (isset($_POST['delete'])) {
+  $deletenip = htmlspecialchars($_POST['nip']);
+  if ($deletenip != $nip) {
+    mysqli_query($con, "DELETE FROM tbl_staff WHERE nip = '$deletenip'");
+    mysqli_query($con, "DELETE FROM tbl_login WHERE id_anggota = '$deletenip'");
+    if (mysqli_affected_rows($con) >= 0) {
+      echo "<script>
+        Swal.fire({
+          title: 'Berhasil menghapus data',
+          confirmButtonText: 'Lanjut',
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            document.location.href='/perpustakaan/staff/staff';
+          }
+        })
+      </script>";
+    } else {
+      echo "<script>
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Gagal menghapus data!',
+        })
+      </script>";
+    }
+  } else {
+    echo "<script>
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Anda tidak dapat menghapus diri anda!',
+    })
+  </script>";
+  }
+}
+
+?>

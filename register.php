@@ -1,3 +1,10 @@
+<?php
+if (isset($_SESSION['login'])) {
+  header("Location: /perpustakaan/");
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
 
