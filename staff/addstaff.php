@@ -35,7 +35,7 @@ if (isset($_POST['add'])) {
   if ($result1) {
     echo "<script>
         Swal.fire({
-          title: 'Selamat anda berhasil mendaftar',
+          title: 'Berhasil menambahkan data',
           confirmButtonText: 'Lanjut',
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
