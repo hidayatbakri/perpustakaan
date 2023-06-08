@@ -94,10 +94,10 @@ if (mysqli_num_rows($result) === 1) {
               </a>
               <ul class="submenu ">
                 <li class="submenu-item ">
-                  <a href="component-alert.html">Data Siswa</a>
+                  <a href="/perpustakaan/staff/siswa">Data Siswa</a>
                 </li>
                 <li class="submenu-item ">
-                  <a href="component-badge.html">Verifikasi Siswa</a>
+                  <a href="/perpustakaan/staff/verifsiswa">Verifikasi Siswa</a>
                 </li>
               </ul>
             </li>
