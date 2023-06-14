@@ -28,50 +28,50 @@ include 'template/header.php';
             </div>
             <div class="card-body">
               <form action="" method="post">
-              <div class="row">
-              <div class="col-md-6">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control form-control-lg bg-light fs-6" name="nis" placeholder="Nis" required>
-                </div>
-                <div class="input-group mb-3">
-                  <input type="email" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email Address" required>
-                </div>
-                <div class="input-group mb-3">
-                  <input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password" required>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control form-control-lg bg-light fs-6" name="nama" placeholder="Nama" required>
-                </div>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control form-control-lg bg-light fs-6" name="telpon" placeholder="Telepon" required>
-                </div>
-                <div class="input-group mb-3">
-                  <select class="form-select bg-light fs-6" name="kelas" aria-label="Default select example">
-                    <option selected>Pilih Kelas</option>
-                    <option value="1">VII A</option>
-                    <option value="2">VII B</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="input-group mb-3">
-                  <select class="form-select bg-light fs-6" name="jk" aria-label="Default select example">
-                    <option selected>Pilih Jenis Kelamin</option>
-                    <option value="Laki-Laki">Laki-Laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                  </select>
-                </div>
-                <div class="input-group mb-3">
-                  <textarea name="alamat" required class="form-control bg-light fs-6" placeholder="Alamat"></textarea>
-                </div>
-              </div>
-              <div class="col-md-12 mt-3">
-                <div class="col-md-12 d-flex justify-content-end">
-                  <a href="/perpustakaan/staff/staff" class="btn btn-light me-3">Kembali</a>
-                  <button type="submit" name="add" class="btn btn-primary">Simpan</button>
-                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="nis" placeholder="Nis" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <input type="email" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="nama" placeholder="Nama" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="telpon" placeholder="Telepon" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <select class="form-select bg-light fs-6" name="kelas" aria-label="Default select example">
+                        <option selected>Pilih Kelas</option>
+                        <option value="1">VII A</option>
+                        <option value="2">VII B</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="input-group mb-3">
+                      <select class="form-select bg-light fs-6" name="jk" aria-label="Default select example">
+                        <option selected>Pilih Jenis Kelamin</option>
+                        <option value="Laki-Laki">Laki-Laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                      </select>
+                    </div>
+                    <div class="input-group mb-3">
+                      <textarea name="alamat" required class="form-control bg-light fs-6" placeholder="Alamat"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mt-3">
+                    <div class="col-md-12 d-flex justify-content-end">
+                      <a href="/perpustakaan/staff/staff" class="btn btn-light me-3">Kembali</a>
+                      <button type="submit" name="add" class="btn btn-primary">Simpan</button>
+                    </div>
               </form>
             </div>
           </div>
@@ -82,7 +82,7 @@ include 'template/header.php';
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<?php include 'template/footer.php'; 
+<?php include 'template/footer.php';
 
 if (isset($_POST["add"])) {
   $id = htmlspecialchars($_POST["nis"]);
@@ -109,7 +109,7 @@ if (isset($_POST["add"])) {
     exit;
   }
 
-  $querysiswa = "INSERT INTO tbl_siswa VALUES ('$id','$nama','$alamat','$telpon','$jk','$kelas','false')";
+  $querysiswa = "INSERT INTO tbl_siswa VALUES ('$id','$nama','$alamat','$telpon','$jk','$kelas','true')";
   $querylogin = "INSERT INTO tbl_login (id_anggota, email, password, level) VALUES('$id', '$email', '$password', 'siswa')";
 
   $result1 = mysqli_query($con, $querylogin);

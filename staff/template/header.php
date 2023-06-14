@@ -86,7 +86,7 @@ if (mysqli_num_rows($result) === 1) {
               </a>
             </li>
 
-            <li class="sidebar-title">Siswa &amp; Kelas</li>
+            <li class="sidebar-title">Data</li>
             <li class="sidebar-item <?= $active == 'siswa' ? 'active' : ''; ?> has-sub">
               <a href="#" class='sidebar-link'>
                 <i class="bi bi-file-earmark-medical-fill"></i>
@@ -104,9 +104,15 @@ if (mysqli_num_rows($result) === 1) {
             <li class="sidebar-item  <?= $active == 'siswa' ? 'active' : ''; ?>">
             </li>
             <li class="sidebar-item  <?= $active == 'kelas' ? 'active' : ''; ?>">
-              <a href="table.html" class='sidebar-link'>
+              <a href="/perpustakaan/staff/kelas" class='sidebar-link'>
                 <i class="bi bi-grid-1x2-fill"></i>
                 <span>Data Kelas</span>
+              </a>
+            </li>
+            <li class="sidebar-item  <?= $active == 'buku' ? 'active' : ''; ?>">
+              <a href="/perpustakaan/staff/buku" class='sidebar-link'>
+                <i class="bi bi-book-half"></i>
+                <span>Data Buku</span>
               </a>
             </li>
             <li class="sidebar-title">Peminjaman</li>
