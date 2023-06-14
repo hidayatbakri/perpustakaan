@@ -150,7 +150,7 @@
     </div>
   </section>
   <footer class="bg-white py-3">
-    <h6 class="text-center">Created by. SMPN 1 Bontonompo &copy; 2023</h6>
+    <h6 class="text-center">Created by. SMAN 3 Gowa &copy; 2023</h6>
   </footer>
   <script src="./src/js/jQuery.min.js"></script>
   <script src="./src/bootstrap/js/bootstrap.bundle.min.js"></script>
