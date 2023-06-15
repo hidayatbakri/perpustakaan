@@ -60,7 +60,7 @@ include 'template/header.php';
   </section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <?php include 'template/footer.php';
 
 if (isset($_POST["add"])) {
@@ -80,7 +80,7 @@ if (isset($_POST["add"])) {
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            document.location.href='/perpustakaan/staff/kelas';
+            document.location.href='/perpustakaan/staff/buku';
           }
         })
       </script>";

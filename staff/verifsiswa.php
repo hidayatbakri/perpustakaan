@@ -26,8 +26,8 @@ $rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.ni
             <div class="card-header">
               <h4>Tabel Data Siswa</h4>
             </div>
-            <div class="card-body">
-              <table class="table mt-5 table-hover table-striped">
+            <div class="card-body" style="overflow-x: scroll;">
+              <table class="table mt-5 table-hover table-striped" id="dataTable">
                 <thead class="bg-primary">
                   <tr>
                     <th class="text-white" scope="col">No</th>
@@ -50,9 +50,9 @@ $rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.ni
                       <td><?= $row['kelas'] ?></td>
                       <td><?= $row['alamat'] ?></td>
                       <td>
-                      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $row['nis'] ?>">
-                        <i class="bi bi-check-all"></i>
-                      </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $row['nis'] ?>">
+                          <i class="bi bi-check-all"></i>
+                        </button>
                       </td>
                     </tr>
 
@@ -62,24 +62,24 @@ $rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.ni
                         <form action="" method="post">
                           <div class="modal-content">
                             <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Verifikasi Siswa</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <input type="hidden" name="nisinput" value="<?= $row['nis']?>">
-                            <h5>Profil siswa</h5>
-                            <ul>
-                              <li>Nama : <?= $row['nama'] ?></li>
-                              <li>Nis : <?= $row['nis'] ?></li>
-                              <li>Jenis Kelamin : <?= $row['jk'] ?></li>
-                              <li>Kelas : <?= $row['kelas'] ?></li>
-                              <li>Alamat : <?= $row['alamat'] ?></li>
-                            </ul>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" name="verif" class="btn btn-primary">Verifikasi</button>
-                          </div>
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Verifikasi Siswa</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <input type="hidden" name="nisinput" value="<?= $row['nis'] ?>">
+                              <h5>Profil siswa</h5>
+                              <ul>
+                                <li>Nama : <?= $row['nama'] ?></li>
+                                <li>Nis : <?= $row['nis'] ?></li>
+                                <li>Jenis Kelamin : <?= $row['jk'] ?></li>
+                                <li>Kelas : <?= $row['kelas'] ?></li>
+                                <li>Alamat : <?= $row['alamat'] ?></li>
+                              </ul>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" name="verif" class="btn btn-primary">Verifikasi</button>
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -103,13 +103,13 @@ $rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.ni
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<?php include 'template/footer.php'; 
+<?php include 'template/footer.php';
 
-if(isset($_POST['verif'])){
+if (isset($_POST['verif'])) {
   $getnis = htmlspecialchars($_POST['nisinput']);
 
   mysqli_query($con, "UPDATE tbl_siswa set valid = 'true' WHERE nis = '$getnis'");
-  if(mysqli_affected_rows($con) >= 0){
+  if (mysqli_affected_rows($con) >= 0) {
     echo "<script>
       Swal.fire({
         title: 'Berhasil verifikasi siswa',

@@ -26,7 +26,9 @@ if (mysqli_num_rows($result) === 1) {
   <link rel="stylesheet" href="../assets/css/main/app.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="../assets/css/main/app-dark.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="../assets/css/shared/iconly.css?v=<?php echo time() ?>">
-
+  <script src="../src/js/jQuery.min.js?v=<?php echo time() ?>"></script>
+  <link href="../src/DataTables/datatables.min.css?v=<?php echo time() ?>" rel="stylesheet" />
+  <script src="../src/DataTables/datatables.min.js?v=<?php echo time() ?>"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 

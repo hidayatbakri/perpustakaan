@@ -26,9 +26,9 @@ $rows = mysqli_query($con, "SELECT tbl_staff.nama, tbl_staff.nip, tbl_staff.alam
             <div class="card-header">
               <h4>Tabel Data Staff</h4>
             </div>
-            <div class="card-body">
-              <a href="/perpustakaan/staff/addstaff" class="btn btn-primary">Tambah data</a>
-              <table class="table mt-5 table-hover table-striped">
+            <div class="card-body" style="overflow-x: scroll;">
+              <a href="/perpustakaan/staff/addstaff" class="btn btn-primary mb-3">Tambah data</a>
+              <table class="table mt-5 table-hover table-striped" id="dataTable">
                 <thead class="bg-primary">
                   <tr>
                     <th class="text-white" scope="col">No</th>
