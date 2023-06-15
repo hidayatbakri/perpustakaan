@@ -26,9 +26,9 @@ $rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.ni
             <div class="card-header">
               <h4>Tabel Data Siswa</h4>
             </div>
-            <div class="card-body">
-            <a href="/perpustakaan/staff/addsiswa" class="btn btn-primary">Tambah data siswa</a>
-              <table class="table mt-5 table-hover table-striped">
+            <div class="card-body" style="overflow-x: scroll;">
+              <a href="/perpustakaan/staff/addsiswa" class="btn btn-primary mb-3">Tambah data siswa</a>
+              <table class="table mt-5 table-hover table-striped" id="dataTable">
                 <thead class="bg-primary">
                   <tr>
                     <th class="text-white" scope="col">No</th>
@@ -70,7 +70,7 @@ $rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.ni
     </div>
   </section>
 </div>
-<?php include 'template/footer.php'; 
+<?php include 'template/footer.php';
 
 if (isset($_POST['delete'])) {
   $deletenis = htmlspecialchars($_POST['nis']);

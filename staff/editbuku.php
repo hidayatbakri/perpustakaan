@@ -62,7 +62,6 @@ $buku = mysqli_fetch_assoc($buku);
   </section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php include 'template/footer.php';
 
 if (isset($_POST["add"])) {

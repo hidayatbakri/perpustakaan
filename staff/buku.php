@@ -26,9 +26,9 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_buku");
             <div class="card-header">
               <h4>Tabel Data Buku</h4>
             </div>
-            <div class="card-body">
-              <a href="/perpustakaan/staff/addbuku" class="btn btn-primary">Tambah data Buku</a>
-              <table class="table mt-5 table-hover table-striped">
+            <div class="card-body" style="overflow-x: scroll;">
+              <a href="/perpustakaan/staff/addbuku" class="btn btn-primary mb-3">Tambah data Buku</a>
+              <table class="table mt-5 table-hover table-striped" id="dataTable">
                 <thead class="bg-primary">
                   <tr>
                     <th class="text-white" scope="col">No</th>
