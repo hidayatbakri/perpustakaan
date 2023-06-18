@@ -5,7 +5,7 @@ if (!isset($_SESSION['login'])) {
   header("Location: /perpustakaan/login");
   exit;
 }
-
+$pathbuku = '/perpustakaan/assets/buku/';
 $nip = $_SESSION['id'];
 $result = mysqli_query($con, "SELECT * FROM tbl_staff WHERE nip = '$nip'");
 
@@ -13,6 +13,49 @@ if (mysqli_num_rows($result) === 1) {
   $staff = mysqli_fetch_assoc($result);
 }
 
+function cekSampul()
+{
+  $sizefile = htmlspecialchars($_FILES['gambar']['size']);
+  $typefile = htmlspecialchars($_FILES['gambar']['type']);
+  $error = htmlspecialchars($_FILES['gambar']['error']);
+  $tmp = htmlspecialchars($_FILES['gambar']['tmp_name']);
+
+
+  if ($error == 4) {
+    return 'buku-default.png';
+  } else {
+
+    $ekstnsivalid = ['jpg', 'jpeg', 'png'];
+    $ekstensi = explode('/', $typefile);
+
+    if (!in_array($ekstensi[1], $ekstnsivalid)) {
+      echo "<script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Format gambar tidak didukung',
+      })
+    </script>";
+
+      return false;
+    }
+
+    if ($sizefile > 512 * 1024) {
+      echo "<script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Ukuran gambar terlalu besar',
+      })
+    </script>";
+
+      return false;
+    }
+    $namaFile = md5(random_int(0, 10000000)) . '.' . $ekstensi[1];
+    move_uploaded_file($tmp, '../assets/buku/' . $namaFile);
+    return $namaFile;
+  }
+}
 
 ?>
 

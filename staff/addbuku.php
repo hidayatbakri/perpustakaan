@@ -27,7 +27,7 @@ include 'template/header.php';
               <h4>Formulir</h4>
             </div>
             <div class="card-body">
-              <form action="" method="post">
+              <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="input-group mb-3">
@@ -45,12 +45,18 @@ include 'template/header.php';
                     <div class="input-group mb-3">
                       <input type="number" class="form-control form-control-lg bg-light fs-6" name="stok" placeholder="Stok Buku" required>
                     </div>
+                    <label for="cover">Sampul Buku</label>
+                    <div class="input-group mb-3">
+                      <input type="file" id="cover" name="gambar" class="form-control form-control-lg bg-light fs-6">
+                    </div>
                   </div>
                   <div class="col-md-12 mt-3">
                     <div class="col-md-12 d-flex justify-content-end">
-                      <a href="/perpustakaan/staff/kelas" class="btn btn-light me-3">Kembali</a>
+                      <a href="/perpustakaan/staff/buku" class="btn btn-light me-3">Kembali</a>
                       <button type="submit" name="add" class="btn btn-primary">Simpan</button>
                     </div>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
@@ -70,7 +76,10 @@ if (isset($_POST["add"])) {
   $tahun_terbit = htmlspecialchars($_POST["tahun_terbit"]);
   $stok = htmlspecialchars($_POST["stok"]);
 
-  $result = mysqli_query($con, "INSERT INTO tbl_buku (judul, penulis, penerbit, tahun_terbit, stok) VALUES ('$judul', '$penulis', '$penerbit', '$tahun_terbit', '$stok')");
+  $gambar = cekSampul();
+
+
+  $result = mysqli_query($con, "INSERT INTO tbl_buku (judul, penulis, penerbit, tahun_terbit, stok, gambar) VALUES ('$judul', '$penulis', '$penerbit', '$tahun_terbit', '$stok', '$gambar')");
 
   if ($result) {
     echo "<script>
@@ -94,5 +103,7 @@ if (isset($_POST["add"])) {
     </script>";
   }
 }
+
+
 
 ?>

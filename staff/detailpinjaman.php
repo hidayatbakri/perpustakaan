@@ -3,7 +3,7 @@ $title = "Detail Pinjaman - Perpustakaan SMAN 3 Gowa";
 $active = "pinjaman";
 include 'template/header.php';
 $getnis = htmlspecialchars($_GET['id']);
-$rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_buku.judul, tbl_buku.id_buku, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = '$getnis' AND tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.status = 'tidak'");
+$rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_buku.judul, tbl_buku.gambar, tbl_buku.id_buku, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = '$getnis' AND tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.status = 'tidak'");
 $datasiswa = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas WHERE tbl_siswa.id_kelas = tbl_kelas.id_kelas AND nis = '$getnis'");
 $datasiswa = mysqli_fetch_assoc($datasiswa);
 ?>
@@ -40,8 +40,9 @@ $datasiswa = mysqli_fetch_assoc($datasiswa);
                     <th class="text-white" scope="col">No</th>
                     <th class="text-white" scope="col">Judul Buku</th>
                     <th class="text-white" scope="col">Tanggal Pinjam</th>
+                    <th class="text-white" scope="col">Sampul</th>
                     <th class="text-white" scope="col">Status</th>
-                    <th class="text-white text-end" scope="col">Aksi</th>
+                    <th class="text-white" scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,8 +52,9 @@ $datasiswa = mysqli_fetch_assoc($datasiswa);
                       <th scope="row"><?= $i; ?></th>
                       <td><?= $row['judul'] ?></td>
                       <td><?= $row['tgl_pinjam'] ?></td>
+                      <td><img src="<?= $pathbuku . $row['gambar'] ?>" alt="sampul-buku" style="width: 100px; object-fit: cover;"></td>
                       <td class="<?= $row['status'] == 'tidak' ? 'text-danger' : '' ?>"><?= $row['status'] == "tidak" ? "Belum dikembalikan" : "Sudah" ?></td>
-                      <td class="d-flex justify-content-end">
+                      <td class="">
                         <form action="" method="post">
                           <input type="hidden" value="<?= $row['id_peminjaman']; ?>" name="id">
                           <input type="hidden" value="<?= $row['id_buku']; ?>" name="buku">

@@ -1,3 +1,10 @@
+<?php
+require 'koneksi.php';
+
+$listbukupopuler = mysqli_query($con, "select tbl_buku.judul, tbl_buku.gambar, tbl_peminjaman.id_buku, COUNT(*) as total FROM tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_buku = tbl_buku.id_buku GROUP BY tbl_buku.id_buku ORDER BY total DESC LIMIT 4;");
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -42,8 +49,8 @@
     </div>
   </nav>
   <section class="header" id="header">
-    <div class="container d-flex align-items-center h-100 pt-5">
-      <div class="row ">
+    <div class="container d-flex align-items-center justify-content-center h-100 pt-5">
+      <div class="row w-100 mt-5">
         <div class="col-md-6 col-sm-12  d-flex justify-content-center flex-column">
           <h1 class="text-white" data-aos="fade-right" data-aos-duration="2000">Perpustakaan SMA Negeri 3 <b class="text-white">Gowa</b></h1>
           <p class="pt-4 text-white" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200">Menggali Potensi Pengetahuan: Jelajahi Sistem Informasi Perpustakaan SMA Negeri 3 Gowa</p>
@@ -53,7 +60,7 @@
           </div>
         </div>
         <div class="col-md-6 col-sm-12 d-flex justify-content-end">
-          <img src="./assets/illustration/book-header.png" class="img-fluid" width="400" alt="book-header" data-aos="fade-left" data-aos-duration="2000">
+          <img src="./assets/illustration/book-header.png" class="img-fluid" width="400" style="object-fit: cover;" alt="book-header" data-aos="fade-left" data-aos-duration="2000">
         </div>
       </div>
     </div>
@@ -102,8 +109,8 @@
                 <i class="fas fa-book-open text-white"></i>
               </div>
               <div>
-                <h5>Membaca buku e-book</h5>
-                <p>Kami menyediakan e-book online untuk di baca secara online.</p>
+                <h5>Administrasi</h5>
+                <p>Dapat digunakan sebagai adminsitrasi sekolah.</p>
               </div>
             </li>
             <li class="list-group-item d-flex" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="100">
@@ -126,26 +133,13 @@
       <h5 class="text-secondary bold text-center" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="50">Buku paling populer</h5>
 
       <div class="d-flex justify-content-center flex-wrap">
-        <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buku Bahasa Indonesia">
-          <a href="">
-            <img class="img-fluid img-buku-populer rounded-2" src="./assets/img/Kelas-9-Buku-Siswa-Bahasa-Indonesia.jpg" alt="buku-populer">
-          </a>
-        </div>
-        <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buku Bahasa Indonesia">
-          <a href="">
-            <img class="img-fluid img-buku-populer rounded-2" src="./assets/img/Kelas-9-Buku-Siswa-Bahasa-Indonesia.jpg" alt="buku-populer">
-          </a>
-        </div>
-        <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buku Bahasa Indonesia">
-          <a href="">
-            <img class="img-fluid img-buku-populer rounded-2" src="./assets/img/Kelas-9-Buku-Siswa-Bahasa-Indonesia.jpg" alt="buku-populer">
-          </a>
-        </div>
-        <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Buku Bahasa Indonesia">
-          <a href="">
-            <img class="img-fluid img-buku-populer rounded-2" src="./assets/img/Kelas-9-Buku-Siswa-Bahasa-Indonesia.jpg" alt="buku-populer">
-          </a>
-        </div>
+        <?php while ($bukupopuler = mysqli_fetch_assoc($listbukupopuler)) : ?>
+          <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?= $bukupopuler['judul'] ?>">
+            <a href="">
+              <img class="img-fluid img-buku-populer rounded-2" data-aos="fade-right" data-aos-delay="0" src="./assets/buku/<?= $bukupopuler['gambar'] ?>" alt="buku-populer">
+            </a>
+          </div>
+        <?php endwhile; ?>
       </div>
     </div>
   </section>

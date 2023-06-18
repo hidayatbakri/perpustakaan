@@ -1,36 +1,4 @@
-body {
-  background: #ececec;
-}
-
-/* ------- Login container --------- */
-.box-area {
-  width: 930px;
-}
-
-.kembali {
-  width: 50px !important;
-  height: 50px;
-  border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  top: -20px;
-  left: -20px;
-  transition: 0.4s ease;
-}
-
-.kembali:hover {
-  transform: translateY(-8px);
-}
-
-/* ------- Right box -------- */
-
-/* ------- Custom placeholder --------- */
-
-/* ------- For small screens --------- */
-
-/* tampilan tablet ke bawah */
-@media (max-width: 768px) {
-  .kembali {
-    top: 0;
-    left: 0;
-  }
+#kiri {
+  background-image: url("../../assets/img/bg-login.png") !important;
+  background-size: cover;
 }

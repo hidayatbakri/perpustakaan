@@ -9,8 +9,6 @@ if (isset($_GET['getkelas'])) {
   $getkelas = htmlspecialchars($_GET['getkelas']);
 
   $rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.id_anggota, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_kelas.id_kelas = '$getkelas' AND tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");
-  // $listsiswa = mysqli_query($con, "SELECT * FROM tbl_siswa WHERE id_kelas = '$getkelas' AND valid = 'true'");
-  // $listbuku = mysqli_query($con, "SELECT * FROM tbl_buku");
 }
 
 ?>
@@ -79,6 +77,8 @@ if (isset($_GET['getkelas'])) {
                     endwhile; ?>
                   </tbody>
                 </table>
+              <?php else : ?>
+                <p class="text-secondary text-center" style="font-style: italic;">Pilih kelas terlebih dahulu</p>
               <?php endif; ?>
             </div>
           </div>
