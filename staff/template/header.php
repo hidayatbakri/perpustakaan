@@ -118,14 +118,14 @@ if (mysqli_num_rows($result) === 1) {
               </a>
             </li>
             <li class="sidebar-title">Peminjaman</li>
-            <li class="sidebar-item <?= $active == 'peminjaman' ? 'active' : ''; ?> has-sub">
+            <li class="sidebar-item <?= $active == 'pinjaman' ? 'active' : ''; ?> has-sub">
               <a href="#" class='sidebar-link'>
                 <i class="bi bi-stack"></i>
                 <span>Peminjaman</span>
               </a>
               <ul class="submenu ">
                 <li class="submenu-item ">
-                  <a href="component-alert.html">Data Pinjaman</a>
+                  <a href="/perpustakaan/staff/pinjaman">Data Pinjaman</a>
                 </li>
                 <li class="submenu-item ">
                   <a href="component-badge.html">Rekap Pinjaman</a>

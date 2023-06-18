@@ -4,6 +4,8 @@ $active = "siswa";
 include 'template/header.php';
 
 
+$listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
+
 ?>
 
 
@@ -50,8 +52,9 @@ include 'template/header.php';
                     <div class="input-group mb-3">
                       <select class="form-select bg-light fs-6" name="kelas" aria-label="Default select example">
                         <option selected>Pilih Kelas</option>
-                        <option value="1">VII A</option>
-                        <option value="2">VII B</option>
+                        <?php while ($kelas = mysqli_fetch_assoc($listkelas)) : ?>
+                          <option value="<?= $kelas['id_kelas'] ?>"><?= $kelas['nama_kelas'] ?></option>
+                        <?php endwhile; ?>
                       </select>
                     </div>
                   </div>
