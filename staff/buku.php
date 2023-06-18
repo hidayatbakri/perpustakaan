@@ -33,11 +33,12 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_buku");
                   <tr>
                     <th class="text-white" scope="col">No</th>
                     <th class="text-white" scope="col">Judul</th>
+                    <th class="text-white" scope="col">Sampul</th>
                     <th class="text-white" scope="col">Penulis</th>
                     <th class="text-white" scope="col">Penerbit</th>
                     <th class="text-white" scope="col">Tahun Terbit</th>
                     <th class="text-white" scope="col">Stok</th>
-                    <th class="text-white text-end" scope="col">Aksi</th>
+                    <th class="text-white text-center" scope="col">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -46,13 +47,15 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_buku");
                     <tr>
                       <th scope="row"><?= $i; ?></th>
                       <td><?= $row['judul'] ?></td>
+                      <td><img src="<?= $pathbuku . $row['gambar'] ?>" alt="sampul-buku" style="width: 100px; object-fit: cover;"></td>
                       <td><?= $row['penulis'] ?></td>
                       <td><?= $row['penerbit'] ?></td>
                       <td><?= $row['tahun_terbit'] ?></td>
                       <td><?= $row['stok'] ?></td>
-                      <td class="d-flex justify-content-end">
+                      <td class="">
                         <form action="" method="post">
                           <input type="hidden" value="<?= $row['id_buku']; ?>" name="id">
+                          <input type="hidden" value="<?= $row['gambar']; ?>" name="gambar">
                           <button type="submit" name="delete" onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
                           <a href="/perpustakaan/staff/editbuku?id=<?= $row['id_buku'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
                         </form>
@@ -73,8 +76,9 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_buku");
 
 if (isset($_POST['delete'])) {
   $idbuku = htmlspecialchars($_POST['id']);
-
+  $gambar = htmlspecialchars($_POST['gambar']);
   mysqli_query($con, "DELETE FROM tbl_buku WHERE id_buku = '$idbuku'");
+  unlink('../assets/buku/' . $gambar);
   if (mysqli_affected_rows($con) >= 0) {
     echo "<script>
       Swal.fire({

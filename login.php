@@ -52,6 +52,7 @@ if (isset($_POST["login"])) {
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
   <link href="./src/bootstrap/css/bootstrap.min.css?v=<?php echo time() ?>" rel="stylesheet">
+  <link href="./src/css/login.css?v=<?php echo time() ?>" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -59,9 +60,9 @@ if (isset($_POST["login"])) {
 
   <div class="row me-1" style="height: 100vh;">
     <a href="/perpustakaan/" class="position-absolute m-2"><img src="/perpustakaan/assets/logo/logosekolah1.png" style="object-fit: cover; width: 200px;"></a>
-    <div id="kiri" class="col-md-8 d-flex justify-content-center align-items-center" style="background-color: #F8F7F7;">
+    <div id="kiri" class="col-md-8 d-flex justify-content-center align-items-center">
       <div class="d-flex justify-content-center">
-        <img src="/perpustakaan/assets/illustration/login.png" style="width: 66%; object-fit: cover;">
+        <img src="/perpustakaan/assets/img/login.png" style="width: 66%; object-fit: cover;">
       </div>
     </div>
     <div class="col-md-4 col-sm-12 py-5 bg-white d-flex justify-content-center align-items-center">
