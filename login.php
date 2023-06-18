@@ -56,50 +56,49 @@ if (isset($_POST["login"])) {
 </head>
 
 <body>
-  <!-- --------- main container ----------  -->
-  <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <!-- --------- login container ----------  -->
-    <div class="row border position-relative rounded-5 p-3 bg-white shadow box-area">
-      <a href="/perpustakaan/">
-        <div class="kembali position-absolute bg-white shadow-sm d-flex justify-content-center align-items-center">
-          <i class="fas fa-chevron-left"></i>
-        </div>
-      </a>
 
-      <!-- --------- left box ----------  -->
-      <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #103cbe;">
-        <div class="featured-image mb-3">
-          <img src="./assets/illustration/computer_illustration_1.png" alt="" class="img-fluid" style="width: 250px;">
-        </div>
-        <p class="text-white fs-2" style="font-family: 'courirer New', Courier, monospace; font-weight: 600;">Halaman Login</p>
-        <small class="text-white text-wrap text-center" style="width :17rem; font-family: 'Courier New', ">Sistem informasi perpustakaan SMAN 3 Gowa</small>
+  <div class="row me-1" style="height: 100vh;">
+    <a href="/perpustakaan/" class="position-absolute m-2"><img src="/perpustakaan/assets/logo/logosekolah1.png" style="object-fit: cover; width: 200px;"></a>
+    <div id="kiri" class="col-md-8 d-flex justify-content-center align-items-center" style="background-color: #F8F7F7;">
+      <div class="d-flex justify-content-center">
+        <img src="/perpustakaan/assets/illustration/login.png" style="width: 66%; object-fit: cover;">
       </div>
-
-      <!-- --------- right box ----------  -->
-      <div class="col-md-6 right-box">
-        <div class="row align-items-center py-3">
-          <form action="" method="post">
-            <div class="header-text mb-4">
-              <h3>Selamat datang</h3>
-              <p>Silahkan isi formulir untuk masuk.</p>
-            </div>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email Address">
-            </div>
-            <div class="input-group mb-5">
-              <input type="password" class="form-control form-control-lg bg-light fs-6" name="password" placeholder="Password">
-            </div>
-            <div class="input-group mb-3">
-              <button type="submit" name="login" class="btn btn-primary btn-lg w-100 fs-6">Masuk</button>
-            </div>
-            <div class="input-group mb-2">
-              <a href="/perpustakaan/register" class="btn btn-light btn-lg w-100 fs-6">Daftar</a>
-            </div>
-          </form>
-        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 py-5 bg-white d-flex justify-content-center align-items-center">
+      <div class="w-100 px-3">
+        <h3>Selamat Datang! 👋</h3>
+        <p class="pb-4">Sistem Informasi Perpustakaan SMAN 3 Gowa</p>
+        <form action="" method="post">
+          <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input type="email" class="form-control mt-1 py-2" id="email" name="email" placeholder="Alamat Email">
+          </div>
+          <div class="form-group mb-4">
+            <label for="password">Password</label>
+            <input type="password" class="form-control mt-1 py-2" id="password" name="password" placeholder="Alamat Email">
+          </div>
+          <div class="form-group mb-3">
+            <button type="submit" name="login" class="btn btn-primary btn-block w-100">Masuk</button>
+            <p class="pt-3 text-center">Belum punya akun? <a href="/perpustakaan/register">Buat akun disini</a></p>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+
+  <script src="src/js/jQuery.min.js?v=<?php echo time() ?>"></script>
+
+  <script>
+    setInterval(() => {
+      if ($(window).width() <= 768) {
+        $("#kiri").hide(500);
+        $("#kiri").removeClass("col-md-8 d-flex justify-content-center align-items-center");
+      } else {
+        $("#kiri").show(500);
+        $("#kiri").addClass("col-md-8 d-flex justify-content-center align-items-center");
+      }
+    }, 500);
+  </script>
 
   <?php if (isset($error)) : ?>
     <script>

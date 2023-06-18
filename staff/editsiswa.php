@@ -7,7 +7,6 @@ if (isset($_GET['nis'])) {
   $getnis = htmlspecialchars($_GET['nis']);
   $profile = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_siswa.nis, tbl_siswa.alamat, tbl_siswa.id_kelas, tbl_kelas.nama_kelas, tbl_siswa.telepon, tbl_siswa.jk, tbl_login.email, tbl_login.level FROM tbl_siswa, tbl_login, tbl_kelas WHERE tbl_siswa.nis = '$getnis' AND tbl_login.id_anggota = '$getnis' AND tbl_siswa.id_kelas = tbl_kelas.id_kelas");
   $profile = mysqli_fetch_assoc($profile);
-
   $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
 }
 
