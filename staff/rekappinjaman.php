@@ -1,6 +1,6 @@
 <?php
-$title = "Pinjaman - Perpustakaan SMAN 3 Gowa";
-$active = "pinjaman";
+$title = "Rekap Peminjaman - Perpustakaan SMAN 3 Gowa";
+$active = "rekap-peminjaman";
 include 'template/header.php';
 mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
@@ -8,7 +8,7 @@ $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
 if (isset($_GET['getkelas'])) {
   $getkelas = htmlspecialchars($_GET['getkelas']);
 
-  $rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.id_anggota, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_kelas.id_kelas = '$getkelas' AND tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.status = 'tidak' GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");
+  $rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.id_anggota, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas, tbl_peminjaman.status FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_kelas.id_kelas = '$getkelas' AND tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.status = 'ya' GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");
 }
 
 ?>
@@ -22,7 +22,7 @@ if (isset($_GET['getkelas'])) {
 </header>
 
 <div class="page-heading">
-  <h3>Data Pinjaman</h3>
+  <h3>Data Rekap Peminjaman</h3>
 </div>
 <div class="page-content">
   <section class="row">
@@ -31,10 +31,9 @@ if (isset($_GET['getkelas'])) {
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Tabel Data Pinjaman</h4>
+              <h4>Tabel Data Rekap Peminjaman</h4>
             </div>
             <div class="card-body" style="overflow-x: scroll;">
-              <a href="/perpustakaan/staff/addpinjaman" class="btn btn-primary mb-4">Tambah data Pinjaman</a>
               <form action="" method="get">
                 <div class="row mb-3">
                   <div class="col-md-12">
@@ -70,7 +69,7 @@ if (isset($_GET['getkelas'])) {
                         <td><?= $row['nama'] ?></td>
                         <td><?= $row['nama_kelas'] ?></td>
                         <td class="d-flex justify-content-end">
-                          <a href="/perpustakaan/staff/detailpinjaman?id=<?= $row['id_anggota'] ?>" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detail</a>
+                          <a href="/perpustakaan/staff/detailrekap?id=<?= $row['id_anggota'] ?>" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Rekap</a>
                         </td>
                       </tr>
                     <?php $i++;
