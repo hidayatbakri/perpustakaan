@@ -5,8 +5,15 @@ if (!isset($_SESSION['login'])) {
   header("Location: /perpustakaan/login");
   exit;
 }
-$pathbuku = '/perpustakaan/assets/buku/';
 $nip = $_SESSION['id'];
+
+$ceklogin = mysqli_query($con, "SELECT * FROM tbl_login WHERE id_anggota = '$nip'");
+
+if (mysqli_num_rows($ceklogin) != 1) {
+  header("Location: /perpustakaan/login");
+}
+
+$pathbuku = '/perpustakaan/assets/buku/';
 $result = mysqli_query($con, "SELECT * FROM tbl_staff WHERE nip = '$nip'");
 
 if (mysqli_num_rows($result) === 1) {
@@ -171,7 +178,7 @@ function cekSampul()
                   <a href="/perpustakaan/staff/pinjaman">Data Pinjaman</a>
                 </li>
                 <li class="submenu-item ">
-                  <a href="component-badge.html">Rekap Pinjaman</a>
+                  <a href="/perpustakaan/staff/rekappinjaman">Rekap Pinjaman</a>
                 </li>
               </ul>
             </li>
