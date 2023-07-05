@@ -2,7 +2,6 @@
 $title = "Pinjaman - Perpustakaan SMAN 3 Gowa";
 $active = "pinjaman";
 include 'template/header.php';
-mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
 $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
 if (isset($_GET['getkelas'])) {

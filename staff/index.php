@@ -11,7 +11,7 @@ $siswa = mysqli_query($con, 'SELECT count(*) as total FROM tbl_siswa');
 $siswa = mysqli_fetch_assoc($siswa);
 $totalkelas = mysqli_query($con, 'SELECT count(*) as total FROM tbl_kelas');
 $totalkelas = mysqli_fetch_assoc($totalkelas);
-$chartPinjam = mysqli_query($con, "SELECT COUNT(MONTH(tbl_peminjaman.tgl_pinjam)) AS total, MONTH(tbl_peminjaman.tgl_pinjam) as bulan, YEAR(tbl_peminjaman.tgl_pinjam) as tahun FROM tbl_peminjaman GROUP BY MONTH(tbl_peminjaman.tgl_pinjam);");
+$chartPinjam = mysqli_query($con, "SELECT COUNT(MONTH(tbl_peminjaman.tgl_pinjam)) AS total, DATE_FORMAT(tgl_pinjam, '%M %Y') as bulan FROM tbl_peminjaman GROUP BY MONTH(tbl_peminjaman.tgl_pinjam) ORDER BY tgl_pinjam DESC LIMIT 12");
 $datachart = array();
 while ($chart = mysqli_fetch_assoc($chartPinjam)) {
   $datachart[] = $chart;
@@ -167,12 +167,16 @@ $recentPinjaman = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.id_a
 <script src="../assets/extensions/apexcharts/apexcharts.min.js?v=<?php echo time() ?>"></script>
 <!-- <script src="../assets/js/pages/dashboard.js?v=<?php echo time() ?>"></script> -->
 <script>
-  const dc = `<?= $dc ?>`
-  dc.forEach(function(item) {
-    var total = item.total;
-    console.log(total);
-  });
-  // console.log(dc)
+  let dc = `<?= $dc ?>`
+  console.log(dc)
+  dc = JSON.parse(dc)
+  datacharttotal = [];
+  datachartbulan = [];
+  datacharttahun = [];
+  for (let i = 0; i < dc.length; i++) {
+    datacharttotal.push(dc[i].total)
+    datachartbulan.push(dc[i].bulan)
+  }
   var optionsProfileVisit = {
     annotations: {
       position: "back",
@@ -190,24 +194,11 @@ $recentPinjaman = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.id_a
     plotOptions: {},
     series: [{
       name: "peminjaman",
-      data: [9, 20, 30, 20, 10, 20, 30, 20, 10, 20, 30, 20],
+      data: datacharttotal,
     }, ],
     colors: "#435ebe",
     xaxis: {
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
+      categories: datachartbulan,
     },
   };
 
