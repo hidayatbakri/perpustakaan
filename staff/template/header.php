@@ -16,6 +16,8 @@ if (mysqli_num_rows($ceklogin) != 1) {
 $pathbuku = '/perpustakaan/assets/buku/';
 $result = mysqli_query($con, "SELECT * FROM tbl_staff WHERE nip = '$nip'");
 
+mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+
 if (mysqli_num_rows($result) === 1) {
   $staff = mysqli_fetch_assoc($result);
 }
@@ -165,6 +167,12 @@ function cekSampul()
               <a href="/perpustakaan/staff/buku" class='sidebar-link'>
                 <i class="bi bi-book-half"></i>
                 <span>Data Buku</span>
+              </a>
+            </li>
+            <li class="sidebar-item  <?= $active == 'kunjungan' ? 'active' : ''; ?>">
+              <a href="/perpustakaan/staff/kunjungan" class='sidebar-link'>
+                <i class="bi bi-people-fill"></i>
+                <span>Kunjungan</span>
               </a>
             </li>
             <li class="sidebar-title">Peminjaman</li>
