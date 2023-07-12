@@ -16,13 +16,12 @@ if (mysqli_num_rows($ceklogin) != 1) {
 $pathbuku = '/perpustakaan/assets/buku/';
 $result = mysqli_query($con, "SELECT * FROM tbl_staff WHERE nip = '$nip'");
 
-mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
 if (mysqli_num_rows($result) === 1) {
   $staff = mysqli_fetch_assoc($result);
 }
 
-function cekSampul()
+function cekSampul($lokasi)
 {
   $sizefile = htmlspecialchars($_FILES['gambar']['size']);
   $typefile = htmlspecialchars($_FILES['gambar']['type']);
@@ -60,8 +59,9 @@ function cekSampul()
 
       return false;
     }
+    // die;
     $namaFile = md5(random_int(0, 10000000)) . '.' . $ekstensi[1];
-    move_uploaded_file($tmp, '../assets/buku/' . $namaFile);
+    move_uploaded_file($tmp, '../assets/' . $lokasi . '/' . $namaFile);
     return $namaFile;
   }
 }
@@ -140,6 +140,19 @@ function cekSampul()
               </a>
             </li>
 
+            <li class="sidebar-title">Umum</li>
+            <li class="sidebar-item  <?= $active == 'kunjungan' ? 'active' : ''; ?>">
+              <a href="/perpustakaan/staff/kunjungan" class='sidebar-link'>
+                <i class="bi bi-people-fill"></i>
+                <span>Kunjungan</span>
+              </a>
+            </li>
+            <li class="sidebar-item  <?= $active == 'pengaturan' ? 'active' : ''; ?>">
+              <a href="/perpustakaan/staff/pengaturan" class='sidebar-link'>
+                <i class="bi bi-gear"></i>
+                <span>Pengaturan</span>
+              </a>
+            </li>
             <li class="sidebar-title">Data</li>
             <li class="sidebar-item <?= $active == 'siswa' ? 'active' : ''; ?> has-sub">
               <a href="#" class='sidebar-link'>
@@ -167,12 +180,6 @@ function cekSampul()
               <a href="/perpustakaan/staff/buku" class='sidebar-link'>
                 <i class="bi bi-book-half"></i>
                 <span>Data Buku</span>
-              </a>
-            </li>
-            <li class="sidebar-item  <?= $active == 'kunjungan' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/kunjungan" class='sidebar-link'>
-                <i class="bi bi-people-fill"></i>
-                <span>Kunjungan</span>
               </a>
             </li>
             <li class="sidebar-title">Peminjaman</li>
