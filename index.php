@@ -2,7 +2,9 @@
 require 'koneksi.php';
 
 $listbukupopuler = mysqli_query($con, "select tbl_buku.judul, tbl_buku.gambar, tbl_peminjaman.id_buku, COUNT(*) as total FROM tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_buku = tbl_buku.id_buku GROUP BY tbl_buku.id_buku ORDER BY total DESC LIMIT 4;");
+$profile = mysqli_query($con, "SELECT * FROM tbl_profile LIMIT 1");
 
+$row = mysqli_fetch_assoc($profile);
 ?>
 
 <!doctype html>
@@ -11,7 +13,16 @@ $listbukupopuler = mysqli_query($con, "select tbl_buku.judul, tbl_buku.gambar, t
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Perpustakaan SMAN 3 Gowa</title>
+  <title><?= $row['nama_perpus'] ?></title>
+  <style>
+    iframe {
+      height: 300px !important;
+      margin: 0;
+      padding: 0;
+      border-radius: 8px;
+      width: 100%;
+    }
+  </style>
   <link rel="stylesheet" href="./src/css/style.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="./src/css/landingpage.css?v=<?php echo time() ?>">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -22,8 +33,8 @@ $listbukupopuler = mysqli_query($con, "select tbl_buku.judul, tbl_buku.gambar, t
 <body>
   <nav class="navbar navbar-expand-lg top py-3">
     <div class="container">
-      <img class="me-3" src="./assets/logo/LOGO-TUT-WURI-handayani.png" alt="logo1" width="60">
-      <a class="navbar-brand text-white" href="#">SMA NEGERI 3 <br><b class="text-white">Gowa</b></a>
+      <img class="me-3" src="./assets/logo/<?= $row['logo'] ?>" alt="logo1" width="150">
+      <!-- <a class="navbar-brand text-white" href="#">SMA NEGERI 3 <br><b class="text-white">Gowa</b></a> -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -39,7 +50,7 @@ $listbukupopuler = mysqli_query($con, "select tbl_buku.judul, tbl_buku.gambar, t
             <a class="nav-link mx-3" href="#populer">Populer</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-3" href="buku">Buku</a>
+            <a class="nav-link mx-3" href="buku.php">Buku</a>
           </li>
           <li class="nav-item">
             <a class="nav-link masuk mx-3 px-4 bg-primary text-white rounded-2" href="login">Masuk</a>
@@ -52,8 +63,8 @@ $listbukupopuler = mysqli_query($con, "select tbl_buku.judul, tbl_buku.gambar, t
     <div class="container d-flex align-items-center justify-content-center h-100 pt-5">
       <div class="row w-100 mt-5">
         <div class="col-md-6 col-sm-12  d-flex justify-content-center flex-column">
-          <h1 class="text-white" data-aos="fade-right" data-aos-duration="2000">Perpustakaan SMA Negeri 3 <b class="text-white">Gowa</b></h1>
-          <p class="pt-4 text-white" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200">Menggali Potensi Pengetahuan: Jelajahi Sistem Informasi Perpustakaan SMA Negeri 3 Gowa</p>
+          <h1 class="text-white fw-bold" data-aos="fade-right" data-aos-duration="2000"><?= $row['nama_sekolah'] ?></h1>
+          <p class="pt-4 text-white" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200"><?= $row['motto'] ?></p>
           <div>
             <a href="login" class="mt-4 me-3 py-2 btn btn-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000">Masuk</a>
             <a href="#" class="mt-4 py-2 btn btn-outline-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="100">Cari Buku</a>
@@ -143,8 +154,17 @@ $listbukupopuler = mysqli_query($con, "select tbl_buku.judul, tbl_buku.gambar, t
       </div>
     </div>
   </section>
+  <section class="lokasi py-5">
+    <div class="container">
+
+      <h3 class="mytext-primary fw-bold text-center" data-aos="zoom-in-right" data-aos-duration="1000">Lokasi</h3>
+      <div data-aos="zoom-in-right">
+        <?= $row['map'] ?>
+      </div>
+    </div>
+  </section>
   <footer class="bg-white py-3">
-    <h6 class="text-center">Created by. SMAN 3 Gowa &copy; 2023</h6>
+    <h6 class="text-center">Created by. <?= $row['nama_perpus'] ?> &copy; 2023</h6>
   </footer>
   <script src="./src/js/jQuery.min.js"></script>
   <script src="./src/bootstrap/js/bootstrap.bundle.min.js"></script>

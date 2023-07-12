@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 18, 2023 at 10:25 AM
+-- Generation Time: Jul 07, 2023 at 10:46 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.7
 
@@ -69,6 +69,30 @@ INSERT INTO `tbl_kelas` (`id_kelas`, `nama_kelas`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_kunjungan`
+--
+
+CREATE TABLE `tbl_kunjungan` (
+  `id_kunjungan` int NOT NULL,
+  `nama` varchar(150) NOT NULL,
+  `baca` varchar(150) NOT NULL,
+  `tgl_kunjungan` date NOT NULL,
+  `pinjam` varchar(100) NOT NULL,
+  `alamat` text NOT NULL,
+  `hp` char(15) NOT NULL,
+  `keterangan` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tbl_kunjungan`
+--
+
+INSERT INTO `tbl_kunjungan` (`id_kunjungan`, `nama`, `baca`, `tgl_kunjungan`, `pinjam`, `alamat`, `hp`, `keterangan`) VALUES
+(1, 'Asrullah ya', 'kimia', '2023-06-22', 'tidak tau', 'Maros', '085788129123', 'Membaca');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_login`
 --
 
@@ -119,7 +143,21 @@ INSERT INTO `tbl_peminjaman` (`id_peminjaman`, `id_anggota`, `id_buku`, `tgl_pin
 (7, 182100, 2, '2023-06-16', NULL, 'tidak'),
 (8, 182002, 4, '2023-06-16', NULL, 'tidak'),
 (9, 182001, 2, '2023-06-16', '2023-06-16', 'ya'),
-(10, 182001, 6, '2023-06-18', NULL, 'tidak');
+(10, 182001, 6, '2023-06-18', NULL, 'tidak'),
+(11, 182001, 6, '2023-05-13', NULL, 'tidak');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_profile`
+--
+
+CREATE TABLE `tbl_profile` (
+  `id_profile` int NOT NULL,
+  `nama_sekolah` varchar(150) NOT NULL,
+  `nama_perpus` varchar(150) NOT NULL,
+  `logo` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -167,6 +205,19 @@ INSERT INTO `tbl_staff` (`nip`, `nama`, `alamat`, `jk`) VALUES
 (111, 'Arman Almaliq', 'Jl. Rumah Dia No.69', 'Perempuan'),
 (112, 'Sirajuddin', 'Sudiang', 'Laki-Laki');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_struktur`
+--
+
+CREATE TABLE `tbl_struktur` (
+  `id_struktur` int NOT NULL,
+  `nama` varchar(150) NOT NULL,
+  `jabatan` varchar(150) NOT NULL,
+  `foto` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -184,6 +235,12 @@ ALTER TABLE `tbl_kelas`
   ADD PRIMARY KEY (`id_kelas`);
 
 --
+-- Indexes for table `tbl_kunjungan`
+--
+ALTER TABLE `tbl_kunjungan`
+  ADD PRIMARY KEY (`id_kunjungan`);
+
+--
 -- Indexes for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
@@ -199,6 +256,12 @@ ALTER TABLE `tbl_peminjaman`
   ADD KEY `id_buku` (`id_buku`);
 
 --
+-- Indexes for table `tbl_profile`
+--
+ALTER TABLE `tbl_profile`
+  ADD PRIMARY KEY (`id_profile`);
+
+--
 -- Indexes for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
@@ -210,6 +273,12 @@ ALTER TABLE `tbl_siswa`
 --
 ALTER TABLE `tbl_staff`
   ADD PRIMARY KEY (`nip`);
+
+--
+-- Indexes for table `tbl_struktur`
+--
+ALTER TABLE `tbl_struktur`
+  ADD PRIMARY KEY (`id_struktur`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -228,6 +297,12 @@ ALTER TABLE `tbl_kelas`
   MODIFY `id_kelas` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `tbl_kunjungan`
+--
+ALTER TABLE `tbl_kunjungan`
+  MODIFY `id_kunjungan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
@@ -237,13 +312,25 @@ ALTER TABLE `tbl_login`
 -- AUTO_INCREMENT for table `tbl_peminjaman`
 --
 ALTER TABLE `tbl_peminjaman`
-  MODIFY `id_peminjaman` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_peminjaman` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_profile`
+--
+ALTER TABLE `tbl_profile`
+  MODIFY `id_profile` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   MODIFY `nis` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192002;
+
+--
+-- AUTO_INCREMENT for table `tbl_struktur`
+--
+ALTER TABLE `tbl_struktur`
+  MODIFY `id_struktur` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

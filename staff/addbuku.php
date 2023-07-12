@@ -76,7 +76,7 @@ if (isset($_POST["add"])) {
   $tahun_terbit = htmlspecialchars($_POST["tahun_terbit"]);
   $stok = htmlspecialchars($_POST["stok"]);
 
-  $gambar = cekSampul();
+  $gambar = cekSampul("buku");
 
 
   $result = mysqli_query($con, "INSERT INTO tbl_buku (judul, penulis, penerbit, tahun_terbit, stok, gambar) VALUES ('$judul', '$penulis', '$penerbit', '$tahun_terbit', '$stok', '$gambar')");

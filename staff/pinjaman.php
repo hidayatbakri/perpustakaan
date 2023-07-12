@@ -6,6 +6,7 @@ include 'template/header.php';
 $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
 if (isset($_GET['getkelas'])) {
   $getkelas = htmlspecialchars($_GET['getkelas']);
+  mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
   $rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.id_anggota, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_kelas.id_kelas = '$getkelas' AND tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.status = 'tidak' GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");
 }

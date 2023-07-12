@@ -47,9 +47,9 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_kunjungan");
                   while ($row = mysqli_fetch_assoc($rows)) : ?>
                     <tr>
                       <th scope="row"><?= $i; ?></th>
+                      <td><?= $row['tgl_kunjungan'] ?></td>
                       <td><?= $row['nama'] ?></td>
                       <td><?= $row['baca'] ?></td>
-                      <td><?= $row['tgl_kunjungan'] ?></td>
                       <td><?= $row['pinjam'] ?></td>
                       <td><?= $row['alamat'] ?></td>
                       <td><?= $row['hp'] ?></td>

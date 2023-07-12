@@ -2,6 +2,7 @@
 $title = "Dashboard - Perpustakaan SMAN 3 Gowa";
 $active = "dashboard";
 include 'template/header.php';
+mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
 $peminjaman = mysqli_query($con, 'SELECT count(*) as total FROM tbl_peminjaman WHERE status = "tidak"');
 $peminjaman = mysqli_fetch_assoc($peminjaman);

@@ -88,7 +88,7 @@ if (isset($_POST["update"])) {
 
       unlink('../assets/buku/' . $gambarlama);
     }
-    $gambar = cekSampul();
+    $gambar = cekSampul("buku");
   }
 
   // die;
