@@ -5,6 +5,12 @@ include 'template/header.php';
 mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
 $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
+
+$jenis = '';
+if(isset($_GET['getJenis'])){
+  $jenis = htmlspecialchars($_GET['getJenis']);
+}
+
 if (isset($_GET['getkelas'])) {
   $getkelas = htmlspecialchars($_GET['getkelas']);
 
@@ -34,10 +40,30 @@ if (isset($_GET['getkelas'])) {
               <h4>Tabel Data Rekap Peminjaman</h4>
             </div>
             <div class="card-body" style="overflow-x: scroll;">
+              
+              <form action="" method="get">
+                <div class="from-group">
+                  <label for="tip">Jenis Peminjaman :</label>
+                  <select name="getJenis" class="form-select" id="jenis">
+                    <option value="siswa">Siswa</option>
+                    <option value="guru">Guru</option>
+                    <option value="umum">Umum</option>
+                  </select>
+                  <div class="row">
+                    <div class="col d-flex justify-content-end">
+
+                      <button class="btn btn-primary px-3 my-3" type="submit">Lanjut</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <?php if($jenis == "siswa") : ?>
               <form action="" method="get">
                 <div class="row mb-3">
                   <div class="col-md-12">
                     <div class="input-group mb-3">
+                      <input type="hidden" name="getJenis" value="<?= $jenis;?>">
                       <select class="form-select bg-light fs-6" name="getkelas" aria-label="Default select example">
                         <option selected>Pilih Kelas</option>
                         <?php while ($kelas = mysqli_fetch_assoc($listkelas)) : ?>
@@ -49,7 +75,7 @@ if (isset($_GET['getkelas'])) {
                   </div>
                 </div>
               </form>
-              <?php
+              <?php endif;
               if (isset($_GET['getkelas'])) :
               ?>
                 <table class="table mt-5 table-hover table-striped" id="dataTable">

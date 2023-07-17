@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 07, 2023 at 10:46 AM
--- Server version: 8.0.30
--- PHP Version: 8.2.7
+-- Waktu pembuatan: 12 Jul 2023 pada 02.53
+-- Versi server: 8.0.30
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_buku`
+-- Struktur dari tabel `tbl_buku`
 --
 
 CREATE TABLE `tbl_buku` (
@@ -38,7 +38,7 @@ CREATE TABLE `tbl_buku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `tbl_buku`
+-- Dumping data untuk tabel `tbl_buku`
 --
 
 INSERT INTO `tbl_buku` (`id_buku`, `judul`, `penulis`, `penerbit`, `tahun_terbit`, `stok`, `gambar`) VALUES
@@ -49,7 +49,7 @@ INSERT INTO `tbl_buku` (`id_buku`, `judul`, `penulis`, `penerbit`, `tahun_terbit
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_kelas`
+-- Struktur dari tabel `tbl_kelas`
 --
 
 CREATE TABLE `tbl_kelas` (
@@ -58,7 +58,7 @@ CREATE TABLE `tbl_kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `tbl_kelas`
+-- Dumping data untuk tabel `tbl_kelas`
 --
 
 INSERT INTO `tbl_kelas` (`id_kelas`, `nama_kelas`) VALUES
@@ -69,7 +69,7 @@ INSERT INTO `tbl_kelas` (`id_kelas`, `nama_kelas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_kunjungan`
+-- Struktur dari tabel `tbl_kunjungan`
 --
 
 CREATE TABLE `tbl_kunjungan` (
@@ -84,7 +84,7 @@ CREATE TABLE `tbl_kunjungan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `tbl_kunjungan`
+-- Dumping data untuk tabel `tbl_kunjungan`
 --
 
 INSERT INTO `tbl_kunjungan` (`id_kunjungan`, `nama`, `baca`, `tgl_kunjungan`, `pinjam`, `alamat`, `hp`, `keterangan`) VALUES
@@ -93,7 +93,7 @@ INSERT INTO `tbl_kunjungan` (`id_kunjungan`, `nama`, `baca`, `tgl_kunjungan`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_login`
+-- Struktur dari tabel `tbl_login`
 --
 
 CREATE TABLE `tbl_login` (
@@ -105,7 +105,7 @@ CREATE TABLE `tbl_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `tbl_login`
+-- Dumping data untuk tabel `tbl_login`
 --
 
 INSERT INTO `tbl_login` (`id_login`, `id_anggota`, `email`, `password`, `level`) VALUES
@@ -118,7 +118,7 @@ INSERT INTO `tbl_login` (`id_login`, `id_anggota`, `email`, `password`, `level`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_peminjaman`
+-- Struktur dari tabel `tbl_peminjaman`
 --
 
 CREATE TABLE `tbl_peminjaman` (
@@ -131,7 +131,7 @@ CREATE TABLE `tbl_peminjaman` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `tbl_peminjaman`
+-- Dumping data untuk tabel `tbl_peminjaman`
 --
 
 INSERT INTO `tbl_peminjaman` (`id_peminjaman`, `id_anggota`, `id_buku`, `tgl_pinjam`, `tgl_kembali`, `status`) VALUES
@@ -149,20 +149,31 @@ INSERT INTO `tbl_peminjaman` (`id_peminjaman`, `id_anggota`, `id_buku`, `tgl_pin
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_profile`
+-- Struktur dari tabel `tbl_profile`
 --
 
 CREATE TABLE `tbl_profile` (
   `id_profile` int NOT NULL,
   `nama_sekolah` varchar(150) NOT NULL,
   `nama_perpus` varchar(150) NOT NULL,
-  `logo` varchar(200) NOT NULL
+  `logo` varchar(200) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `alamat` text NOT NULL,
+  `map` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `motto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data untuk tabel `tbl_profile`
+--
+
+INSERT INTO `tbl_profile` (`id_profile`, `nama_sekolah`, `nama_perpus`, `logo`, `email`, `alamat`, `map`, `motto`) VALUES
+(8, 'SMAN 4 Makassar', 'Perpustakaan Digital Mariam Al-Ijliya', '311d19c9e3feecc2569aa400f4003dd8.png', 'siapasaja@gmail.com', 'Jl Cakalang', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.9190607554883!2d119.41632097439586!3d-5.116745851808984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbefd6267f0a4c3%3A0xb2b9481a8a9515f6!2sSMA%20Negeri%204%20Makassar!5e0!3m2!1sid!2sid!4v1689126464592!5m2!1sid!2sid\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', 'Menggali Potensi Pengetahuan: Jelajahi Sistem Informasi Perpustakaan SMA Negeri 4 Makassar');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_siswa`
+-- Struktur dari tabel `tbl_siswa`
 --
 
 CREATE TABLE `tbl_siswa` (
@@ -176,7 +187,7 @@ CREATE TABLE `tbl_siswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `tbl_siswa`
+-- Dumping data untuk tabel `tbl_siswa`
 --
 
 INSERT INTO `tbl_siswa` (`nis`, `nama`, `alamat`, `telepon`, `jk`, `id_kelas`, `valid`) VALUES
@@ -187,7 +198,7 @@ INSERT INTO `tbl_siswa` (`nis`, `nama`, `alamat`, `telepon`, `jk`, `id_kelas`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_staff`
+-- Struktur dari tabel `tbl_staff`
 --
 
 CREATE TABLE `tbl_staff` (
@@ -198,7 +209,7 @@ CREATE TABLE `tbl_staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `tbl_staff`
+-- Dumping data untuk tabel `tbl_staff`
 --
 
 INSERT INTO `tbl_staff` (`nip`, `nama`, `alamat`, `jk`) VALUES
@@ -208,7 +219,7 @@ INSERT INTO `tbl_staff` (`nip`, `nama`, `alamat`, `jk`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_struktur`
+-- Struktur dari tabel `tbl_struktur`
 --
 
 CREATE TABLE `tbl_struktur` (
@@ -223,32 +234,32 @@ CREATE TABLE `tbl_struktur` (
 --
 
 --
--- Indexes for table `tbl_buku`
+-- Indeks untuk tabel `tbl_buku`
 --
 ALTER TABLE `tbl_buku`
   ADD PRIMARY KEY (`id_buku`);
 
 --
--- Indexes for table `tbl_kelas`
+-- Indeks untuk tabel `tbl_kelas`
 --
 ALTER TABLE `tbl_kelas`
   ADD PRIMARY KEY (`id_kelas`);
 
 --
--- Indexes for table `tbl_kunjungan`
+-- Indeks untuk tabel `tbl_kunjungan`
 --
 ALTER TABLE `tbl_kunjungan`
   ADD PRIMARY KEY (`id_kunjungan`);
 
 --
--- Indexes for table `tbl_login`
+-- Indeks untuk tabel `tbl_login`
 --
 ALTER TABLE `tbl_login`
   ADD PRIMARY KEY (`id_login`),
   ADD KEY `id_anggota` (`id_anggota`);
 
 --
--- Indexes for table `tbl_peminjaman`
+-- Indeks untuk tabel `tbl_peminjaman`
 --
 ALTER TABLE `tbl_peminjaman`
   ADD PRIMARY KEY (`id_peminjaman`),
@@ -256,78 +267,78 @@ ALTER TABLE `tbl_peminjaman`
   ADD KEY `id_buku` (`id_buku`);
 
 --
--- Indexes for table `tbl_profile`
+-- Indeks untuk tabel `tbl_profile`
 --
 ALTER TABLE `tbl_profile`
   ADD PRIMARY KEY (`id_profile`);
 
 --
--- Indexes for table `tbl_siswa`
+-- Indeks untuk tabel `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   ADD PRIMARY KEY (`nis`),
   ADD KEY `id_kelas` (`id_kelas`);
 
 --
--- Indexes for table `tbl_staff`
+-- Indeks untuk tabel `tbl_staff`
 --
 ALTER TABLE `tbl_staff`
   ADD PRIMARY KEY (`nip`);
 
 --
--- Indexes for table `tbl_struktur`
+-- Indeks untuk tabel `tbl_struktur`
 --
 ALTER TABLE `tbl_struktur`
   ADD PRIMARY KEY (`id_struktur`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tbl_buku`
+-- AUTO_INCREMENT untuk tabel `tbl_buku`
 --
 ALTER TABLE `tbl_buku`
   MODIFY `id_buku` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tbl_kelas`
+-- AUTO_INCREMENT untuk tabel `tbl_kelas`
 --
 ALTER TABLE `tbl_kelas`
   MODIFY `id_kelas` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `tbl_kunjungan`
+-- AUTO_INCREMENT untuk tabel `tbl_kunjungan`
 --
 ALTER TABLE `tbl_kunjungan`
   MODIFY `id_kunjungan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tbl_login`
+-- AUTO_INCREMENT untuk tabel `tbl_login`
 --
 ALTER TABLE `tbl_login`
   MODIFY `id_login` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `tbl_peminjaman`
+-- AUTO_INCREMENT untuk tabel `tbl_peminjaman`
 --
 ALTER TABLE `tbl_peminjaman`
   MODIFY `id_peminjaman` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tbl_profile`
+-- AUTO_INCREMENT untuk tabel `tbl_profile`
 --
 ALTER TABLE `tbl_profile`
-  MODIFY `id_profile` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_profile` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `tbl_siswa`
+-- AUTO_INCREMENT untuk tabel `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   MODIFY `nis` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192002;
 
 --
--- AUTO_INCREMENT for table `tbl_struktur`
+-- AUTO_INCREMENT untuk tabel `tbl_struktur`
 --
 ALTER TABLE `tbl_struktur`
   MODIFY `id_struktur` int NOT NULL AUTO_INCREMENT;

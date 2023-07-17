@@ -83,7 +83,6 @@ if (isset($_POST["add"])) {
   $email = htmlspecialchars($_POST["email"]);
   $password = htmlspecialchars($_POST["password"]);
   $hp = htmlspecialchars($_POST["hp"]);
-  $kelas = htmlspecialchars($_POST["kelas"]);
   $jk = htmlspecialchars($_POST["jk"]);
   $alamat = htmlspecialchars($_POST["alamat"]);
 
