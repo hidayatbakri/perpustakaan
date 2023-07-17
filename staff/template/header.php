@@ -168,6 +168,12 @@ function cekSampul($lokasi)
                 </li>
               </ul>
             </li>
+            <li class="sidebar-item  <?= $active == 'guru' ? 'active' : ''; ?>">
+              <a href="/perpustakaan/staff/guru" class='sidebar-link'>
+                <i class="bi bi-person-lines-fill"></i>
+                <span>Guru</span>
+              </a>
+            </li>
             <li class="sidebar-item  <?= $active == 'siswa' ? 'active' : ''; ?>">
             </li>
             <li class="sidebar-item  <?= $active == 'kelas' ? 'active' : ''; ?>">
