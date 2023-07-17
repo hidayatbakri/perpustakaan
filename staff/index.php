@@ -12,7 +12,6 @@ $siswa = mysqli_query($con, 'SELECT count(*) as total FROM tbl_siswa');
 $siswa = mysqli_fetch_assoc($siswa);
 $totalkelas = mysqli_query($con, 'SELECT count(*) as total FROM tbl_kelas');
 $totalkelas = mysqli_fetch_assoc($totalkelas);
-mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 $chartPinjam = mysqli_query($con, "SELECT COUNT(MONTH(tbl_peminjaman.tgl_pinjam)) AS total, DATE_FORMAT(tgl_pinjam, '%M %Y') as bulan FROM tbl_peminjaman GROUP BY MONTH(tbl_peminjaman.tgl_pinjam) ORDER BY tgl_pinjam DESC LIMIT 12");
 $datachart = array();
 while ($chart = mysqli_fetch_assoc($chartPinjam)) {

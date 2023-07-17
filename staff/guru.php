@@ -27,7 +27,7 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_guru, tbl_login WHERE tbl_login.id
               <h4>Tabel Data Guru</h4>
             </div>
             <div class="card-body" style="overflow-x: scroll;">
-              <a href="/perpustakaan/staff/addguru" class="btn btn-primary mb-3">Tambah data siswa</a>
+              <a href="/perpustakaan/staff/addguru" class="btn btn-primary mb-3">Tambah data guru</a>
               <table class="table mt-5 table-hover table-striped" id="dataTable">
                 <thead class="bg-primary">
                   <tr>
@@ -77,7 +77,7 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_guru, tbl_login WHERE tbl_login.id
 if (isset($_POST['delete'])) {
   $deletenip = htmlspecialchars($_POST['nip']);
 
-  mysqli_query($con, "DELETE FROM tbl_siswa WHERE nip = '$deletenip'");
+  mysqli_query($con, "DELETE FROM tbl_guru WHERE nip = '$deletenip'");
   mysqli_query($con, "DELETE FROM tbl_login WHERE id_anggota = '$deletenip'");
   if (mysqli_affected_rows($con) >= 0) {
     echo "<script>
@@ -87,7 +87,7 @@ if (isset($_POST['delete'])) {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          document.location.href='/perpustakaan/staff/siswa';
+          document.location.href='/perpustakaan/staff/guru';
         }
       })
     </script>";
