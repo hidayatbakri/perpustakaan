@@ -45,6 +45,12 @@ include 'template/header.php';
                     <div class="input-group mb-3">
                       <input type="number" class="form-control form-control-lg bg-light fs-6" name="stok" placeholder="Stok Buku" required>
                     </div>
+                    <select class="form-select mb-3" name="jenis" required aria-label="Default select example">
+                      <option selected>Jenis buku</option>
+                      <option value="siswa">Siswa</option>
+                      <option value="guru">Guru</option>
+                      <option value="umum">Umum</option>
+                    </select>
                     <label for="cover">Sampul Buku</label>
                     <div class="input-group mb-3">
                       <input type="file" id="cover" name="gambar" class="form-control form-control-lg bg-light fs-6">
@@ -75,11 +81,12 @@ if (isset($_POST["add"])) {
   $penerbit = htmlspecialchars($_POST["penerbit"]);
   $tahun_terbit = htmlspecialchars($_POST["tahun_terbit"]);
   $stok = htmlspecialchars($_POST["stok"]);
+  $jenis = htmlspecialchars($_POST["jenis"]);
 
   $gambar = cekSampul("buku");
 
 
-  $result = mysqli_query($con, "INSERT INTO tbl_buku (judul, penulis, penerbit, tahun_terbit, stok, gambar) VALUES ('$judul', '$penulis', '$penerbit', '$tahun_terbit', '$stok', '$gambar')");
+  $result = mysqli_query($con, "INSERT INTO tbl_buku (judul, penulis, penerbit, tahun_terbit, stok, gambar, jenis) VALUES ('$judul', '$penulis', '$penerbit', '$tahun_terbit', '$stok', '$gambar', '$jenis')");
 
   if ($result) {
     echo "<script>

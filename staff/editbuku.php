@@ -47,6 +47,12 @@ $buku = mysqli_fetch_assoc($buku);
                     <div class="input-group mb-3">
                       <input type="number" class="form-control form-control-lg bg-light fs-6" name="stok" placeholder="Stok Buku" value="<?= $buku['stok'] ?>" required>
                     </div>
+                    <select class="form-select mb-3" name="jenis" required aria-label="Default select example">
+                      <option value="<?= $buku['jenis'] ?>" selected><?= $buku['jenis'] ?></option>
+                      <option value="siswa">Siswa</option>
+                      <option value="guru">Guru</option>
+                      <option value="umum">Umum</option>
+                    </select>
                     <label for="cover">Sampul Buku</label>
                     <div class="my-3">
                       <img src="<?= $pathbuku . $buku['gambar'] ?>" alt="buku-sampul" style="width: 200px; object-fit: cover;">
@@ -61,6 +67,7 @@ $buku = mysqli_fetch_assoc($buku);
                       <a href="/perpustakaan/staff/buku" class="btn btn-light me-3">Kembali</a>
                       <button type="submit" name="update" class="btn btn-primary">Simpan</button>
                     </div>
+                  </div>
               </form>
             </div>
           </div>
@@ -79,6 +86,7 @@ if (isset($_POST["update"])) {
   $penerbit = htmlspecialchars($_POST["penerbit"]);
   $tahun_terbit = htmlspecialchars($_POST["tahun_terbit"]);
   $stok = htmlspecialchars($_POST["stok"]);
+  $jenis = htmlspecialchars($_POST["jenis"]);
   $gambarlama = htmlspecialchars($_POST['gambarlama']);
 
   if ($_FILES['gambar']['error'] == 4) {
@@ -99,6 +107,7 @@ if (isset($_POST["update"])) {
                         penerbit = '$penerbit',
                         tahun_terbit = '$tahun_terbit',
                         gambar = '$gambar',
+                        jenis = '$jenis',
                         stok = '$stok' WHERE id_buku = '$id'");
 
   if ($result) {

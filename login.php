@@ -21,12 +21,12 @@ if (isset($_POST["login"])) {
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row["password"])) {
 
+      $_SESSION['login'] = true;
+      $_SESSION['id'] = $row['id_anggota'];
+      $_SESSION['level'] = $row['level'];
       if ($row['level'] == 'siswa') {
         echo "<script>document.location.href='/perpustakaan/siswa'</script>";
       } elseif ($row['level'] == 'staff') {
-        $_SESSION['login'] = true;
-        $_SESSION['id'] = $row['id_anggota'];
-        $_SESSION['level'] = $row['level'];
         echo "<script>document.location.href='/perpustakaan/staff'</script>";
       }
       exit;
