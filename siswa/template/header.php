@@ -5,20 +5,16 @@ if (!isset($_SESSION['login'])) {
   header("Location: /perpustakaan/login");
   exit;
 }
-$nip = $_SESSION['id'];
+$nis = $_SESSION['id'];
 
-$ceklogin = mysqli_query($con, "SELECT * FROM tbl_login WHERE id_anggota = '$nip'");
+$ceklogin = mysqli_query($con, "SELECT * FROM tbl_login WHERE id_anggota = '$nis'");
 
 if (mysqli_num_rows($ceklogin) != 1) {
   header("Location: /perpustakaan/login");
 }
 
-if ($_SESSION['level'] != 'staff') {
-  header("Location: /perpustakaan/login");
-}
-
 $pathbuku = '/perpustakaan/assets/buku/';
-$result = mysqli_query($con, "SELECT * FROM tbl_staff WHERE nip = '$nip'");
+$result = mysqli_query($con, "SELECT * FROM tbl_siswa WHERE nis = '$nis'");
 
 
 if (mysqli_num_rows($result) === 1) {
@@ -131,63 +127,16 @@ function cekSampul($lokasi)
                 <span>Dashboard</span>
               </a>
             </li>
-            <li class="sidebar-item <?= $active == 'staff' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/staff" class='sidebar-link'>
-                <i class="bi bi-person-badge-fill"></i>
-                <span>Staff</span>
-              </a>
-            </li>
             <li class="sidebar-item <?= $active == 'profile' ? 'active' : ''; ?>">
-              <a href="profile" class='sidebar-link'>
+              <a href="/perpustakaan/siswa/profile" class='sidebar-link'>
                 <i class="bi bi-person-fill"></i>
                 <span>Profil</span>
               </a>
             </li>
 
-            <li class="sidebar-title">Umum</li>
-            <li class="sidebar-item  <?= $active == 'kunjungan' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/kunjungan" class='sidebar-link'>
-                <i class="bi bi-people-fill"></i>
-                <span>Kunjungan</span>
-              </a>
-            </li>
-            <li class="sidebar-item  <?= $active == 'pengaturan' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/pengaturan" class='sidebar-link'>
-                <i class="bi bi-gear"></i>
-                <span>Pengaturan</span>
-              </a>
-            </li>
             <li class="sidebar-title">Data</li>
-            <li class="sidebar-item <?= $active == 'siswa' ? 'active' : ''; ?> has-sub">
-              <a href="#" class='sidebar-link'>
-                <i class="bi bi-file-earmark-medical-fill"></i>
-                <span>Siswa</span>
-              </a>
-              <ul class="submenu ">
-                <li class="submenu-item ">
-                  <a href="/perpustakaan/staff/siswa">Data Siswa</a>
-                </li>
-                <li class="submenu-item ">
-                  <a href="/perpustakaan/staff/verifsiswa">Verifikasi Siswa</a>
-                </li>
-              </ul>
-            </li>
-            <li class="sidebar-item  <?= $active == 'guru' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/guru" class='sidebar-link'>
-                <i class="bi bi-person-lines-fill"></i>
-                <span>Guru</span>
-              </a>
-            </li>
-            <li class="sidebar-item  <?= $active == 'siswa' ? 'active' : ''; ?>">
-            </li>
-            <li class="sidebar-item  <?= $active == 'kelas' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/kelas" class='sidebar-link'>
-                <i class="bi bi-grid-1x2-fill"></i>
-                <span>Data Kelas</span>
-              </a>
-            </li>
             <li class="sidebar-item  <?= $active == 'buku' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/buku" class='sidebar-link'>
+              <a href="/perpustakaan/siswa/buku" class='sidebar-link'>
                 <i class="bi bi-book-half"></i>
                 <span>Data Buku</span>
               </a>
@@ -200,10 +149,10 @@ function cekSampul($lokasi)
               </a>
               <ul class="submenu ">
                 <li class="submenu-item ">
-                  <a href="/perpustakaan/staff/pinjaman">Data Pinjaman</a>
+                  <a href="/perpustakaan/siswa/pinjaman">Pinjam Buku</a>
                 </li>
                 <li class="submenu-item ">
-                  <a href="/perpustakaan/staff/rekappinjaman">Rekap Pinjaman</a>
+                  <a href="/perpustakaan/siswa/detailrekap">Rekap Pinjaman</a>
                 </li>
               </ul>
             </li>
