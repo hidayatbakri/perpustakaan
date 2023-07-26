@@ -2,7 +2,7 @@
 $title = "Dashboard - Perpustakaan SMAN 3 Gowa";
 $active = "dashboard";
 include 'template/header.php';
-mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+
 
 $peminjaman = mysqli_query($con, 'SELECT count(*) as total FROM tbl_peminjaman WHERE status = "tidak"');
 $peminjaman = mysqli_fetch_assoc($peminjaman);
@@ -22,7 +22,7 @@ $dc = json_encode($datachart);
 
 
 
-$recentPinjaman = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.id_anggota, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC LIMIT 3");
+$recentPinjaman = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.jenis, tbl_peminjaman.id_anggota, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC LIMIT 3");
 ?>
 
 
@@ -154,7 +154,7 @@ $recentPinjaman = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.id_a
               </div>
             </div>
             <div class="px-4">
-              <a href="/perpustakaan/staff/detailpinjaman?id=<?= $recent['id_anggota'] ?>" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Lihat Data</a>
+              <a href="/perpustakaan/staff/detailpinjaman?id=<?= $recent['id_anggota'] ?>&jenis=<?= $recent['jenis']?>" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Lihat Data</a>
             </div>
           <?php endwhile; ?>
         </div>

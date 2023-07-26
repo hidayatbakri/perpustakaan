@@ -82,6 +82,7 @@ function cekSampul($lokasi)
   <link href="../src/DataTables/datatables.min.css?v=<?php echo time() ?>" rel="stylesheet" />
   <script src="../src/DataTables/datatables.min.js?v=<?php echo time() ?>"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../assets/js/qrcode.min.js"></script>
 </head>
 
 <body>
@@ -155,6 +156,12 @@ function cekSampul($lokasi)
                   <a href="/perpustakaan/siswa/detailrekap">Rekap Pinjaman</a>
                 </li>
               </ul>
+            </li>
+            <li class="sidebar-item  <?= $active == 'keterangan' ? 'active' : ''; ?>">
+              <a href="/perpustakaan/siswa/keterangan" class='sidebar-link'>
+              <i class="bi bi-postcard"></i>
+                <span>Kartu Keterangan</span>
+              </a>
             </li>
 
             <li class="sidebar-title">Lanjutan</li>

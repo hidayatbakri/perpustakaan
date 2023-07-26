@@ -145,10 +145,10 @@ function cekSampul($lokasi)
             </li>
 
             <li class="sidebar-title">Umum</li>
-            <li class="sidebar-item  <?= $active == 'kunjungan' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/kunjungan" class='sidebar-link'>
-                <i class="bi bi-people-fill"></i>
-                <span>Kunjungan</span>
+            <li class="sidebar-item  <?= $active == 'struktur' ? 'active' : ''; ?>">
+              <a href="/perpustakaan/staff/struktur" class='sidebar-link'>
+              <i class="bi bi-diagram-3"></i>
+                <span>Struktur</span>
               </a>
             </li>
             <li class="sidebar-item  <?= $active == 'pengaturan' ? 'active' : ''; ?>">
@@ -190,6 +190,12 @@ function cekSampul($lokasi)
               <a href="/perpustakaan/staff/buku" class='sidebar-link'>
                 <i class="bi bi-book-half"></i>
                 <span>Data Buku</span>
+              </a>
+            </li>
+            <li class="sidebar-item  <?= $active == 'kunjungan' ? 'active' : ''; ?>">
+              <a href="/perpustakaan/staff/kunjungan" class='sidebar-link'>
+                <i class="bi bi-people-fill"></i>
+                <span>Kunjungan</span>
               </a>
             </li>
             <li class="sidebar-title">Peminjaman</li>
