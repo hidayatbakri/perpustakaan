@@ -4,6 +4,15 @@ require 'koneksi.php';
 $listbukupopuler = mysqli_query($con, "select tbl_buku.judul, tbl_buku.gambar, tbl_peminjaman.id_buku, COUNT(*) as total FROM tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_buku = tbl_buku.id_buku GROUP BY tbl_buku.id_buku ORDER BY total DESC LIMIT 4;");
 $profile = mysqli_query($con, "SELECT * FROM tbl_profile LIMIT 1");
 
+$buku = mysqli_query($con, "SELECT COUNT(*) AS total FROM tbl_buku");
+$buku = mysqli_fetch_assoc($buku);
+$siswa = mysqli_query($con, "SELECT COUNT(*) AS total FROM tbl_siswa");
+$siswa = mysqli_fetch_assoc($siswa);
+$peminjaman = mysqli_query($con, "SELECT COUNT(*) AS total FROM tbl_peminjaman WHERE status = 'ya'");
+$peminjaman = mysqli_fetch_assoc($peminjaman);
+$struktur = mysqli_query($con, "SELECT * FROM tbl_struktur, tbl_jabatan WHERE tbl_jabatan.id_jabatan = tbl_struktur.id_jabatan ORDER BY tingkat ASC");
+
+
 $row = mysqli_fetch_assoc($profile);
 ?>
 
@@ -50,7 +59,7 @@ $row = mysqli_fetch_assoc($profile);
             <a class="nav-link mx-3" href="#populer">Populer</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-3" href="buku.php">Buku</a>
+            <a class="nav-link mx-3" href="buku">Buku</a>
           </li>
           <li class="nav-item">
             <a class="nav-link masuk mx-3 px-4 bg-primary text-white rounded-2" href="login">Masuk</a>
@@ -67,7 +76,7 @@ $row = mysqli_fetch_assoc($profile);
           <p class="pt-4 text-white" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="200"><?= $row['motto'] ?></p>
           <div>
             <a href="login" class="mt-4 me-3 py-2 btn btn-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000">Masuk</a>
-            <a href="#" class="mt-4 py-2 btn btn-outline-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="100">Cari Buku</a>
+            <a href="buku" class="mt-4 py-2 btn btn-outline-light rounded mybtn" data-aos="fade-right" data-aos-duration="2000" data-aos-delay="100">Cari Buku</a>
           </div>
         </div>
         <div class="col-md-6 col-sm-12 d-flex justify-content-end">
@@ -79,20 +88,22 @@ $row = mysqli_fetch_assoc($profile);
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
     <path fill="#03045e" fill-opacity="1" d="M0,192L48,181.3C96,171,192,149,288,160C384,171,480,213,576,224C672,235,768,213,864,176C960,139,1056,85,1152,80C1248,75,1344,117,1392,138.7L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
   </svg>
+  
+  
   <section class="data py-5 mt-3">
     <div class="container">
       <div class="row">
         <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000">
           <h1 style="font-size: 54px;"><i class="fas fa-book"></i></h3>
-            <p class="fs-4"><b>+99</b> Buku</p>
+            <p class="fs-4"><b><?= $buku['total'] ?></b> Buku</p>
         </div>
         <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
           <h1 style="font-size: 54px;"><i class="fas fa-users"></i></h3>
-            <p class="fs-4"><b>+99</b> Pengguna</p>
+            <p class="fs-4"><b><?= $siswa['total'] ?></b> Pengguna</p>
         </div>
         <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="150">
           <h1 style="font-size: 54px;"><i class="fas fa-book-open"></i></h3>
-            <p class="fs-4"><b>+20</b> E-Book</p>
+            <p class="fs-4"><b><?= $peminjaman['total'] ?></b> Pinjaman</p>
         </div>
       </div>
     </div>
@@ -129,8 +140,8 @@ $row = mysqli_fetch_assoc($profile);
                 <i class="fas fa-book-reader text-white"></i>
               </div>
               <div>
-                <h5>Bisa mengunduh e-book</h5>
-                <p>Kamu bisa mengunduh e-book jika tersedia.</p>
+                <h5>Pinjam dari rumah</h5>
+                <p>Bisa digunakan dari rumah.</p>
               </div>
             </li>
           </ul>
@@ -146,7 +157,7 @@ $row = mysqli_fetch_assoc($profile);
       <div class="d-flex justify-content-center flex-wrap">
         <?php while ($bukupopuler = mysqli_fetch_assoc($listbukupopuler)) : ?>
           <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?= $bukupopuler['judul'] ?>">
-            <a href="">
+            <a href="/perpustakaan/detailbuku?id=<?= $bukupopuler['id_buku']?>">
               <img class="img-fluid img-buku-populer rounded-2" data-aos="fade-right" data-aos-delay="0" src="./assets/buku/<?= $bukupopuler['gambar'] ?>" alt="buku-populer">
             </a>
           </div>
@@ -161,6 +172,24 @@ $row = mysqli_fetch_assoc($profile);
       <div data-aos="zoom-in-right">
         <?= $row['map'] ?>
       </div>
+    </div>
+  </section>
+  <section class="struktur py-5 mt-3">
+    <div class="container">
+    <h3 class="mytext-primary fw-bold" data-aos="zoom-in-right" data-aos-duration="1000">Struktur</h3>
+      <h5 class="text-secondary bold" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="50">Struktur anggota kami</h5>
+    <div class="d-flex flex-wrap justify-content-center py-3">
+    <?php while ($str = mysqli_fetch_assoc($struktur)) : ?>
+      <div class="card m-3 border-0 shadow" style="width: 18rem;" data-aos="zoom-in-right" data-aos-duration="1000">
+        <div class="card-body">
+          <img src="./assets/struktur/<?= $str['foto'] ?>" style="width: 250px; height: 250px; object-fit: cover;"/>
+          <h5 class="card-title"><?= $str['nama'] ?></h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary"><?= $str['nama_jabatan'] ?></h6>
+        </div>
+      </div>
+      <?php endwhile; ?>
+    </div>
+      
     </div>
   </section>
   <footer class="bg-white py-3">

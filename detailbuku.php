@@ -1,14 +1,10 @@
 <?php
 require 'koneksi.php';
-
-$listbuku = mysqli_query($con, "SELECT * FROM tbl_buku ORDER BY id_buku DESC");
-
-if(isset($_GET['judul'])){
-  $judul = htmlspecialchars($_GET['judul']);
-  $listbuku = mysqli_query($con, "SELECT * FROM tbl_buku WHERE judul LIKE '%$judul%' ORDER BY id_buku DESC");
-}
-
-$listbukupopuler = mysqli_query($con, "select tbl_buku.judul, tbl_buku.gambar, tbl_peminjaman.id_buku, COUNT(*) as total FROM tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_buku = tbl_buku.id_buku GROUP BY tbl_buku.id_buku ORDER BY total DESC LIMIT 4;");
+$id = htmlspecialchars($_GET['id']);
+$buku = mysqli_query($con, "SELECT * FROM tbl_buku WHERE tbl_buku.id_buku = '$id'");
+$buku = mysqli_fetch_assoc($buku);
+$total = mysqli_query($con, "SELECT COUNT(*) AS total FROM tbl_peminjaman WHERE id_buku = '$id' GROUP BY id_buku");
+$total = mysqli_fetch_assoc($total);
 $profile = mysqli_query($con, "SELECT * FROM tbl_profile LIMIT 1");
 $row = mysqli_fetch_assoc($profile);
 ?>
@@ -49,12 +45,32 @@ $row = mysqli_fetch_assoc($profile);
       </div>
     </div>
   </nav>
-  <section class="populer py-5" id="populer">
-    <div class="container">
-      <h3 class="mytext-primary fw-bold text-center" data-aos="zoom-in-right" data-aos-duration="1000">Populer</h3>
-      <h5 class="text-secondary bold text-center" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="50">Buku paling populer</h5>
+  <section class="py-5 " >
+    <div class="container" >
+      <h3 class="mytext-primary fw-bold">Buku <?= $buku['judul'] ?></h3>
+      <div class="row mt-5" >
+        <div class="col-md-4">
+          <img class="img-fluid img-buku-populer rounded-2" style="min-height: 400px !important;" src="./assets/buku/<?= $buku['gambar'] ?>" alt="buku-populer">
+        </div>
+        <div class="col-md-8">
+          <h5 class="text-secondary bold">Detail buku</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Judul : <?= $buku['judul']?></li>
+            <li class="list-group-item">Penerbit : <?= $buku['penerbit']?></li>
+            <li class="list-group-item">Penulis : <?= $buku['penulis']?></li>
+            <li class="list-group-item">Tahun Terbit : <?= $buku['tahun_terbit']?></li>
+            <li class="list-group-item">Telah dipinjam : <?= $total['total'] ?? '0' ?>x</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-12 d-flex justify-content-end">
+          <a href="/perpustakaan/buku" class="btn btn-secondary py-2 me-3">Kembali</a>
+          <a href="/perpustakaan/login" class="btn btn-primary py-2">Pinjam Buku</a>
+        </div>
+      </div>
 
-      <div class="d-flex justify-content-center flex-wrap">
+      <!-- <div class="d-flex justify-content-center flex-wrap">
         <?php while ($bukupopuler = mysqli_fetch_assoc($listbukupopuler)) : ?>
           <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?= $bukupopuler['judul'] ?>">
             <a href="/perpustakaan/detailbuku?id=<?= $bukupopuler['id_buku']?>">
@@ -62,26 +78,9 @@ $row = mysqli_fetch_assoc($profile);
             </a>
           </div>
         <?php endwhile; ?>
-      </div>
+      </div> -->
 
-      <div style="margin-top: 120px;">
-
-        <h3 class="mytext-primary fw-bold" data-aos="zoom-in-right" data-aos-duration="1000">Data Buku</h3>
-        <h5 class="text-secondary bold" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="50">Daftar buku yang tersedia</h5>
-        <form action="" method="get" class="d-flex mt-3">
-          <input type="text" name="judul" class="form-control" placeholder="Cari Buku...">
-          <button type="submit" class="btn btn-primary ms-3">Cari</button>
-        </form>
-        <div class="d-flex justify-content-center flex-wrap">
-          <?php while ($buku = mysqli_fetch_assoc($listbuku)) : ?>
-            <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?= $buku['judul'] ?>">
-              <a href="/perpustakaan/detailbuku?id=<?= $buku['id_buku']?>">
-                <img class="img-fluid img-buku-populer rounded-2" data-aos="fade-right" data-aos-delay="0" src="./assets/buku/<?= $buku['gambar'] ?>" alt="buku-populer">
-              </a>
-            </div>
-          <?php endwhile; ?>
-        </div>
-      </div>
+      
     </div>
   </section>
   <footer class="bg-white py-3">
