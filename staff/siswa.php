@@ -3,7 +3,7 @@ $title = "Siswa - Perpustakaan SMAN 3 Gowa";
 $active = "siswa";
 include 'template/header.php';
 
-$rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.nis, tbl_siswa.alamat, tbl_siswa.jk, tbl_siswa.id_kelas, tbl_login.email, tbl_login.level, tbl_kelas.nama_kelas as 'kelas' FROM tbl_siswa, tbl_login, tbl_kelas WHERE tbl_siswa.nis = tbl_login.id_anggota AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_siswa.valid = 'true'")
+$rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.nisn, tbl_siswa.alamat, tbl_siswa.jk, tbl_siswa.id_kelas, tbl_login.email, tbl_login.level, tbl_kelas.nama_kelas as 'kelas' FROM tbl_siswa, tbl_login, tbl_kelas WHERE tbl_siswa.nisn = tbl_login.id_anggota AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_siswa.valid = 'true'")
 ?>
 
 
@@ -33,10 +33,9 @@ $rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.ni
                   <tr>
                     <th class="text-white" scope="col">No</th>
                     <th class="text-white" scope="col">Nama</th>
-                    <th class="text-white" scope="col">Nis</th>
+                    <th class="text-white" scope="col">Nisn</th>
                     <th class="text-white" scope="col">Jenis Kelamin</th>
                     <th class="text-white" scope="col">Kelas</th>
-                    <th class="text-white" scope="col">Alamat</th>
                     <th class="text-white" scope="col">Aksi</th>
                   </tr>
                 </thead>
@@ -46,16 +45,15 @@ $rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.ni
                     <tr>
                       <th scope="row"><?= $i; ?></th>
                       <td><?= $row['nama'] ?></td>
-                      <td><?= $row['nis'] ?></td>
+                      <td><?= $row['nisn'] ?></td>
                       <td><?= $row['jk'] ?></td>
                       <td><?= $row['kelas'] ?></td>
-                      <td><?= $row['alamat'] ?></td>
                       <td>
                         <form action="" method="post">
-                          <input type="hidden" value="<?= $row['nis']; ?>" name="nis">
+                          <input type="hidden" value="<?= $row['nisn']; ?>" name="nisn">
                           <button type="submit" name="delete" onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
-                          <a href="/perpustakaan/staff/editsiswa?nis=<?= $row['nis'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                          <a href="/perpustakaan/staff/detailsiswa?nis=<?= $row['nis'] ?>" class="btn btn-info btn-sm"><i class="bi bi-eye-fill"></i></a>
+                          <a href="/perpustakaan/staff/editsiswa?nisn=<?= $row['nisn'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                          <a href="/perpustakaan/staff/detailsiswa?nisn=<?= $row['nisn'] ?>" class="btn btn-info btn-sm"><i class="bi bi-eye-fill"></i></a>
                         </form>
                       </td>
                     </tr>
@@ -73,10 +71,10 @@ $rows = mysqli_query($con, "SELECT tbl_siswa.valid, tbl_siswa.nama, tbl_siswa.ni
 <?php include 'template/footer.php';
 
 if (isset($_POST['delete'])) {
-  $deletenis = htmlspecialchars($_POST['nis']);
+  $deletenisn = htmlspecialchars($_POST['nisn']);
 
-  mysqli_query($con, "DELETE FROM tbl_siswa WHERE nis = '$deletenis'");
-  mysqli_query($con, "DELETE FROM tbl_login WHERE id_anggota = '$deletenis'");
+  mysqli_query($con, "DELETE FROM tbl_siswa WHERE nisn = '$deletenisn'");
+  mysqli_query($con, "DELETE FROM tbl_login WHERE id_anggota = '$deletenisn'");
   if (mysqli_affected_rows($con) >= 0) {
     echo "<script>
       Swal.fire({

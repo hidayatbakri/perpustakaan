@@ -3,8 +3,8 @@ $title = "Ubah Staff - Perpustakaan SMAN 3 Gowa";
 $active = "staff";
 include 'template/header.php';
 
-$nissession = $_SESSION['id'];
-$profile = mysqli_query($con, "SELECT * FROM tbl_login WHERE tbl_login.id_anggota = '$nissession'");
+$nisnsession = $_SESSION['id'];
+$profile = mysqli_query($con, "SELECT * FROM tbl_login WHERE tbl_login.id_anggota = '$nisnsession'");
 $profile = mysqli_fetch_assoc($profile);
 
 
@@ -62,7 +62,7 @@ if (isset($_POST['update'])) {
   if (strlen($password) > 0) {
     $password = password_hash($password, PASSWORD_DEFAULT);
     $queryLogin = "UPDATE tbl_login SET
-              password = '$password' WHERE id_anggota = '$nissession'";
+              password = '$password' WHERE id_anggota = '$nisnsession'";
   }
 
   mysqli_query($con, $queryLogin);

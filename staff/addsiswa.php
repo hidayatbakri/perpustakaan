@@ -29,11 +29,11 @@ $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
               <h4>Formulir</h4>
             </div>
             <div class="card-body">
-              <form action="" method="post">
+              <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="nis" placeholder="Nis" required>
+                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="nisn" placeholder="Nisn" required>
                     </div>
                     <div class="input-group mb-3">
                       <input type="email" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email Address" required>
@@ -61,10 +61,13 @@ $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
                   <div class="col-md-12">
                     <div class="input-group mb-3">
                       <select class="form-select bg-light fs-6" name="jk" aria-label="Default select example">
-                        <option selected>Pilih Jenis Kelamin</option>
+                        <option selected>Pilih Jenisn Kelamin</option>
                         <option value="Laki-Laki">Laki-Laki</option>
                         <option value="Perempuan">Perempuan</option>
                       </select>
+                    </div>
+                    <div class="input-group mb-3">
+                      <input type="file" class="form-control" name="gambar">
                     </div>
                     <div class="input-group mb-3">
                       <textarea name="alamat" required class="form-control bg-light fs-6" placeholder="Alamat"></textarea>
@@ -72,7 +75,7 @@ $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
                   </div>
                   <div class="col-md-12 mt-3">
                     <div class="col-md-12 d-flex justify-content-end">
-                      <a href="/perpustakaan/staff/staff" class="btn btn-light me-3">Kembali</a>
+                      <a href="/perpustakaan/staff/siswa" class="btn btn-light me-3">Kembali</a>
                       <button type="submit" name="add" class="btn btn-primary">Simpan</button>
                     </div>
               </form>
@@ -87,7 +90,7 @@ $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
 <?php include 'template/footer.php';
 
 if (isset($_POST["add"])) {
-  $id = htmlspecialchars($_POST["nis"]);
+  $id = htmlspecialchars($_POST["nisn"]);
   $nama = htmlspecialchars($_POST["nama"]);
   $email = htmlspecialchars($_POST["email"]);
   $password = htmlspecialchars($_POST["password"]);
@@ -105,13 +108,15 @@ if (isset($_POST["add"])) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Email atau nis sudah terdaftar!',
+        text: 'Email atau nisn sudah terdaftar!',
       })
     </script>";
     exit;
   }
 
-  $querysiswa = "INSERT INTO tbl_siswa VALUES ('$id','$nama','$alamat','$telpon','$jk','$kelas','true')";
+  $gambar = cekSampul("profile");
+
+  $querysiswa = "INSERT INTO tbl_siswa VALUES ('$id','$nama','$alamat','$telpon','$jk','$kelas','$gambar', 'true')";
   $querylogin = "INSERT INTO tbl_login (id_anggota, email, password, level) VALUES('$id', '$email', '$password', 'siswa')";
 
   $result1 = mysqli_query($con, $querylogin);

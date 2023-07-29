@@ -4,11 +4,11 @@ $active = "dashboard";
 include 'template/header.php';
 mysqli_query($con, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
-$peminjaman = mysqli_query($con, 'SELECT count(*) as total FROM tbl_peminjaman WHERE status = "tidak" AND tbl_peminjaman.id_anggota = "$nis"');
+$peminjaman = mysqli_query($con, 'SELECT count(*) as total FROM tbl_peminjaman WHERE status = "tidak" AND tbl_peminjaman.id_anggota = "$nisn"');
 $peminjaman = mysqli_fetch_assoc($peminjaman);
-$totalpeminjaman = mysqli_query($con, 'SELECT count(*) as total FROM tbl_peminjaman WHERE status = "ya" AND tbl_peminjaman.id_anggota = "$nis"');
+$totalpeminjaman = mysqli_query($con, 'SELECT count(*) as total FROM tbl_peminjaman WHERE status = "ya" AND tbl_peminjaman.id_anggota = "$nisn"');
 $totalpeminjaman = mysqli_fetch_assoc($totalpeminjaman);
-$chartPinjam = mysqli_query($con, "SELECT COUNT(MONTH(tbl_peminjaman.tgl_pinjam)) AS total, DATE_FORMAT(tgl_pinjam, '%M %Y') as bulan FROM tbl_peminjaman WHERE tbl_peminjaman.id_anggota = '$nis' GROUP BY MONTH(tbl_peminjaman.tgl_pinjam) ORDER BY tgl_pinjam DESC LIMIT 12");
+$chartPinjam = mysqli_query($con, "SELECT COUNT(MONTH(tbl_peminjaman.tgl_pinjam)) AS total, DATE_FORMAT(tgl_pinjam, '%M %Y') as bulan FROM tbl_peminjaman WHERE tbl_peminjaman.id_anggota = '$nisn' GROUP BY MONTH(tbl_peminjaman.tgl_pinjam) ORDER BY tgl_pinjam DESC LIMIT 12");
 $datachart = array();
 while ($chart = mysqli_fetch_assoc($chartPinjam)) {
   $datachart[] = $chart;
@@ -91,7 +91,7 @@ $dc = json_encode($datachart);
             </div>
             <div class="ms-3 name">
               <h5 class="font-bold"><?= $staff['nama'] ?></h5>
-              <h6 class="text-muted mb-0"><?= $staff['nis'] ?></h6>
+              <h6 class="text-muted mb-0"><?= $staff['nisn'] ?></h6>
             </div>
           </div>
         </div>

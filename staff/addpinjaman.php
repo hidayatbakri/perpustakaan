@@ -74,7 +74,7 @@ $listbuku = mysqli_query($con, "SELECT * FROM tbl_buku WHERE jenis = '$jenis' OR
                         <tr>
                           <th class="text-white" scope="col">No</th>
                           <th class="text-white" scope="col">Nama</th>
-                          <th class="text-white" scope="col">Nis</th>
+                          <th class="text-white" scope="col">Nisn</th>
                           <th class="text-white" scope="col">Jenis Kelamin</th>
                           <th class="text-white" scope="col">Kelas</th>
                           <th class="text-white" scope="col">Aksi</th>
@@ -86,12 +86,12 @@ $listbuku = mysqli_query($con, "SELECT * FROM tbl_buku WHERE jenis = '$jenis' OR
                           <tr>
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $row['nama'] ?></td>
-                            <td><?= $row['nis'] ?></td>
+                            <td><?= $row['nisn'] ?></td>
                             <td><?= $row['jk'] ?></td>
                             <td><?= $row['nama_kelas'] ?></td>
                             <td>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="id" required value="<?= $row['nis']; ?>">
+                                <input class="form-check-input" type="radio" name="id" required value="<?= $row['nisn']; ?>">
                               </div>
                             </td>
                           </tr>
@@ -204,7 +204,7 @@ if (isset($_POST["add"])) {
     exit;
   }
 
-  $postnis = htmlspecialchars($_POST["id"]);
+  $postnisn = htmlspecialchars($_POST["id"]);
   $buku = $_POST["buku"];
   $status;
 
@@ -215,7 +215,7 @@ if (isset($_POST["add"])) {
     if ($cekstok['stok'] > 0) {
       $stoknow = $cekstok['stok'] - 1;
       $buku[$i] = htmlspecialchars($buku[$i]);
-      $querypinjam = "INSERT INTO tbl_peminjaman (id_anggota, id_buku, tgl_pinjam, status, jenis) VALUES ('$postnis','$buku[$i]', CURRENT_DATE(),'tidak', '$jenis')";
+      $querypinjam = "INSERT INTO tbl_peminjaman (id_anggota, id_buku, tgl_pinjam, status, jenis) VALUES ('$postnisn','$buku[$i]', CURRENT_DATE(),'tidak', '$jenis')";
       mysqli_query($con, "UPDATE tbl_buku SET stok = $stoknow WHERE id_buku = '$buku[$i]'");
       $result1 = mysqli_query($con, $querypinjam);
 

@@ -28,6 +28,9 @@ $profile = mysqli_fetch_assoc($row);
               <h4>Data diri guru</h4>
             </div>
             <div class="card-body pt-3">
+              <div class="d-flex justify-content-center mb-3">
+                <img class="rounded" src="../assets/profile/<?= $profile['foto'] ?>" style="width: 150px; height: 180px; object-fit: cover;" alt="">
+              </div>
               <table class="table">
                 <tbody>
                   <tr>
@@ -62,7 +65,7 @@ $profile = mysqli_fetch_assoc($row);
               </table>
               <div class="d-flex justify-content-end">
                 <a href="/perpustakaan/staff/guru" class="btn btn-light mt-5 me-3">Kembali</a>
-                <a href="/perpustakaan/staff/editguru?nip=<?= $getnis ?>" class="btn btn-primary mt-5">Ubah Profil</a>
+                <a href="/perpustakaan/staff/editguru?nip=<?= $getnip ?>" class="btn btn-primary mt-5">Ubah Profil</a>
               </div>
             </div>
           </div>

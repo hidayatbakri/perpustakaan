@@ -147,7 +147,7 @@ function cekSampul($lokasi)
             <li class="sidebar-title">Umum</li>
             <li class="sidebar-item  <?= $active == 'struktur' ? 'active' : ''; ?>">
               <a href="/perpustakaan/staff/struktur" class='sidebar-link'>
-              <i class="bi bi-diagram-3"></i>
+                <i class="bi bi-diagram-3"></i>
                 <span>Struktur</span>
               </a>
             </li>
@@ -172,12 +172,25 @@ function cekSampul($lokasi)
                 </li>
               </ul>
             </li>
-            <li class="sidebar-item  <?= $active == 'guru' ? 'active' : ''; ?>">
-              <a href="/perpustakaan/staff/guru" class='sidebar-link'>
+            <li class="sidebar-item <?= $active == 'guru' ? 'active' : ''; ?> has-sub">
+              <a href="#" class='sidebar-link'>
                 <i class="bi bi-person-lines-fill"></i>
                 <span>Guru</span>
               </a>
+              <ul class="submenu ">
+                <li class="submenu-item ">
+                  <a href="/perpustakaan/staff/guru">Data Guru</a>
+                </li>
+                <li class="submenu-item ">
+                  <a href="/perpustakaan/staff/verifguru">Verifikasi Guru</a>
+                </li>
+              </ul>
             </li>
+            <!-- <li class="sidebar-item  <?= $active == 'guru' ? 'active' : ''; ?>">
+              <a href="/perpustakaan/staff/guru" class='sidebar-link'>
+                <span>Guru</span>
+              </a>
+            </li> -->
             <li class="sidebar-item  <?= $active == 'siswa' ? 'active' : ''; ?>">
             </li>
             <li class="sidebar-item  <?= $active == 'kelas' ? 'active' : ''; ?>">

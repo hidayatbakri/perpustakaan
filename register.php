@@ -6,6 +6,51 @@ if (isset($_SESSION['login'])) {
 
 $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
 
+function cekSampul($lokasi)
+{
+  $sizefile = htmlspecialchars($_FILES['gambar']['size']);
+  $typefile = htmlspecialchars($_FILES['gambar']['type']);
+  $error = htmlspecialchars($_FILES['gambar']['error']);
+  $tmp = htmlspecialchars($_FILES['gambar']['tmp_name']);
+
+
+  if ($error == 4) {
+    return 'buku-default.png';
+  } else {
+
+    $ekstnsivalid = ['jpg', 'jpeg', 'png'];
+    $ekstensi = explode('/', $typefile);
+
+    if (!in_array($ekstensi[1], $ekstnsivalid)) {
+      echo "<script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Format gambar tidak didukung',
+      })
+    </script>";
+
+      return false;
+    }
+
+    if ($sizefile > 512 * 1024) {
+      echo "<script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Ukuran gambar terlalu besar',
+      })
+    </script>";
+
+      return false;
+    }
+    // die;
+    $namaFile = md5(random_int(0, 10000000)) . '.' . $ekstensi[1];
+    move_uploaded_file($tmp, 'assets/' . $lokasi . '/' . $namaFile);
+    return $namaFile;
+  }
+}
+
 ?>
 
 
@@ -28,26 +73,17 @@ $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
   <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <!-- --------- login container ----------  -->
     <div class="row border position-relative rounded-5 p-3 bg-white shadow box-area">
-      <a href="/perpustakaan/">
-        <div class="kembali position-absolute bg-white shadow-sm d-flex justify-content-center align-items-center">
-          <i class="fas fa-chevron-left"></i>
-        </div>
-      </a>
-
-
-
-      <!-- --------- right box ----------  -->
       <div class="col-12 right-box">
         <div class="row align-items-center py-3">
           <div class="header-text mb-4">
             <h3>Selamat datang</h3>
             <p>Silahkan isi formulir untuk daftar.</p>
           </div>
-          <form action="" method="post">
+          <form action="" method="post" enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-6">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control form-control-lg bg-light fs-6" name="nis" placeholder="Nis" required>
+                  <input type="text" class="form-control form-control-lg bg-light fs-6" name="nisn" placeholder="Nisn" required>
                 </div>
                 <div class="input-group mb-3">
                   <input type="email" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email Address" required>
@@ -81,6 +117,9 @@ $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
                   </select>
                 </div>
                 <div class="input-group mb-3">
+                  <input type="file" class="form-control" name="gambar">
+                </div>
+                <div class="input-group mb-3">
                   <textarea name="alamat" required class="form-control bg-light fs-6" placeholder="Alamat"></textarea>
                 </div>
               </div>
@@ -88,6 +127,9 @@ $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
 
                 <div class="input-group mb-3">
                   <button type="submit" name="register" class="btn btn-primary btn-lg w-100 fs-6">Daftar</button>
+                </div>
+                <div class="mb-3 input-group">
+                  <a href="registerguru" class="btn btn-secondary btn-lg w-100 fs-6">Daftar sebagai guru</a>
                 </div>
                 <div class="input-group mb-2">
                   <a href="login" class="btn btn-light btn-lg w-100 fs-6">Masuk</a>
@@ -110,7 +152,7 @@ $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
 <?php
 require 'koneksi.php';
 if (isset($_POST["register"])) {
-  $id = htmlspecialchars($_POST["nis"]);
+  $id = htmlspecialchars($_POST["nisn"]);
   $nama = htmlspecialchars($_POST["nama"]);
   $email = htmlspecialchars($_POST["email"]);
   $password = htmlspecialchars($_POST["password"]);
@@ -118,6 +160,7 @@ if (isset($_POST["register"])) {
   $kelas = htmlspecialchars($_POST["kelas"]);
   $jk = htmlspecialchars($_POST["jk"]);
   $alamat = htmlspecialchars($_POST["alamat"]);
+  // $gambar = $_POST['foto'];
 
   $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -128,13 +171,15 @@ if (isset($_POST["register"])) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Email atau nis sudah terdaftar!',
+        text: 'Email atau nisn sudah terdaftar!',
       })
     </script>";
     exit;
   }
 
-  $querysiswa = "INSERT INTO tbl_siswa VALUES ('$id','$nama','$alamat','$telpon','$jk','$kelas','false')";
+  $gambar = cekSampul("profile");
+
+  $querysiswa = "INSERT INTO tbl_siswa VALUES ('$id','$nama','$alamat','$telpon','$jk','$kelas', '$gambar','false')";
   $querylogin = "INSERT INTO tbl_login (id_anggota, email, password, level) VALUES('$id', '$email', '$password', 'siswa')";
 
   $result1 = mysqli_query($con, $querylogin);

@@ -9,7 +9,7 @@ $jenis = '';
 if (isset($_GET['getJenis'])) {
   $jenis = htmlspecialchars($_GET['getJenis']);
   if ($jenis == 'siswa') {
-    $rows = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_siswa.nis = tbl_peminjaman.id_anggota AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.jenis = '$jenis' AND tbl_peminjaman.status = 'ya' GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");
+    $rows = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_siswa.nisn = tbl_peminjaman.id_anggota AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.jenis = '$jenis' AND tbl_peminjaman.status = 'ya' GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");
   } elseif ($jenis == 'guru') {
 
     $rows = mysqli_query($con, "SELECT * FROM tbl_guru, tbl_buku, tbl_peminjaman WHERE  tbl_peminjaman.id_anggota = tbl_guru.nip AND tbl_peminjaman.id_buku = tbl_buku.id_buku  AND tbl_peminjaman.status = 'tidak' GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");
@@ -34,7 +34,7 @@ if (isset($_GET['getJenis'])) {
     <div class="col-12">
       <div class="row">
         <div class="col-12">
-        <div class="card">
+          <div class="card">
             <div class="card-header">
               <h4>Tabel data pinjaman <?= $jenis; ?></h4>
             </div>
@@ -56,7 +56,7 @@ if (isset($_GET['getJenis'])) {
                   </div>
                 </div>
               </form>
-              
+
               <?php if ($jenis == "siswa") : ?>
                 <table class="table mt-5 table-hover table-striped" id="dataTable">
                   <thead class="bg-primary">
@@ -75,7 +75,7 @@ if (isset($_GET['getJenis'])) {
                         <td><?= $row['nama'] ?></td>
                         <td><?= $row['nama_kelas'] ?></td>
                         <td class="d-flex justify-content-end">
-                            <a href="/perpustakaan/staff/detailrekap?id=<?= $row['id_anggota'] ?>" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Rekap</a>
+                          <a href="/perpustakaan/staff/detailrekap?id=<?= $row['id_anggota'] ?>" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Rekap</a>
                         </td>
                       </tr>
                     <?php $i++;

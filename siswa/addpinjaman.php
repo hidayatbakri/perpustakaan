@@ -78,7 +78,7 @@ $listbuku = mysqli_query($con, "SELECT * FROM tbl_buku WHERE jenis = 'siswa' ORD
 <?php include 'template/footer.php';
 
 if (isset($_POST["add"])) {
-  $postnis = $_SESSION['id'];
+  $postnisn = $_SESSION['id'];
   $buku = $_POST["buku"];
   $status;
 
@@ -88,7 +88,7 @@ if (isset($_POST["add"])) {
 
     if ($cekstok['stok'] > 0) {
       $stoknow = $cekstok['stok'] - 1;
-      $querypinjam = "INSERT INTO tbl_peminjaman (id_anggota, id_buku, tgl_pinjam, status, jenis) VALUES ('$postnis','$buku[$i]', CURRENT_DATE(),'req', 'siswa')";
+      $querypinjam = "INSERT INTO tbl_peminjaman (id_anggota, id_buku, tgl_pinjam, status, jenis) VALUES ('$postnisn','$buku[$i]', CURRENT_DATE(),'req', 'siswa')";
       mysqli_query($con, "UPDATE tbl_buku SET stok = $stoknow WHERE id_buku = '$buku[$i]'");
       $result1 = mysqli_query($con, $querypinjam);
 

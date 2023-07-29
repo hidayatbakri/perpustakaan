@@ -26,7 +26,7 @@ include 'template/header.php';
               <h4>Formulir</h4>
             </div>
             <div class="card-body">
-              <form action="" method="post">
+              <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="input-group mb-3">
@@ -54,6 +54,10 @@ include 'template/header.php';
                       </select>
                     </div>
                   </div>
+                  <label for="gambar">Gambar :</label>
+                  <div class="input-group mb-3">
+                    <input type="file" class="form-control form-control-lg bg-light fs-6" name="gambar" required>
+                  </div>
                   <div class="col-md-12">
                     <div class="input-group mb-3">
                       <textarea name="alamat" required class="form-control bg-light fs-6" placeholder="Alamat"></textarea>
@@ -61,7 +65,7 @@ include 'template/header.php';
                   </div>
                   <div class="col-md-12 mt-3">
                     <div class="col-md-12 d-flex justify-content-end">
-                      <a href="/perpustakaan/staff/staff" class="btn btn-light me-3">Kembali</a>
+                      <a href="/perpustakaan/staff/guru" class="btn btn-light me-3">Kembali</a>
                       <button type="submit" name="add" class="btn btn-primary">Simpan</button>
                     </div>
                   </div>
@@ -101,11 +105,13 @@ if (isset($_POST["add"])) {
     exit;
   }
 
-  $querysiswa = "INSERT INTO tbl_guru VALUES ('$id','$nama','$jk','$hp','$alamat')";
+  $gambar = cekSampul("profile");
+
+  $queryguru = "INSERT INTO tbl_guru VALUES ('$id','$nama','$jk','$hp','$alamat', '$gambar', 'true')";
   $querylogin = "INSERT INTO tbl_login (id_anggota, email, password, level) VALUES('$id', '$email', '$password', 'guru')";
 
   $result1 = mysqli_query($con, $querylogin);
-  $result2 = mysqli_query($con, $querysiswa);
+  $result2 = mysqli_query($con, $queryguru);
 
   if ($result1) {
     echo "<script>

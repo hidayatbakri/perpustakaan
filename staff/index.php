@@ -22,7 +22,7 @@ $dc = json_encode($datachart);
 
 
 
-$recentPinjaman = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.jenis, tbl_peminjaman.id_anggota, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC LIMIT 3");
+$recentPinjaman = mysqli_query($con, "SELECT tbl_siswa.foto, tbl_siswa.nama, tbl_peminjaman.jenis, tbl_peminjaman.id_anggota, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = tbl_siswa.nisn AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.status = 'tidak' GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC LIMIT 3");
 ?>
 
 
@@ -146,7 +146,7 @@ $recentPinjaman = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.jeni
           <?php while ($recent = mysqli_fetch_assoc($recentPinjaman)) : ?>
             <div class="recent-message d-flex px-4 py-3">
               <div class="avatar avatar-lg">
-                <img src="../assets/images/faces/4.jpg">
+                <img src="../assets/profile/<?= $recent['foto'] ?>">
               </div>
               <div class="name ms-4">
                 <h5 class="mb-1"><?= $recent['nama'] ?></h5>
@@ -154,7 +154,7 @@ $recentPinjaman = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.jeni
               </div>
             </div>
             <div class="px-4">
-              <a href="/perpustakaan/staff/detailpinjaman?id=<?= $recent['id_anggota'] ?>&jenis=<?= $recent['jenis']?>" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Lihat Data</a>
+              <a href="/perpustakaan/staff/detailpinjaman?id=<?= $recent['id_anggota'] ?>&jenis=<?= $recent['jenis'] ?>" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Lihat Data</a>
             </div>
           <?php endwhile; ?>
         </div>

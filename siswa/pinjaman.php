@@ -4,8 +4,8 @@ $active = "pinjaman";
 include 'template/header.php';
 $getid = $_SESSION['id'];
 
-$rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_buku.judul, tbl_buku.gambar, tbl_buku.id_buku, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.id_anggota = '$getid' AND (tbl_peminjaman.status = 'tidak' OR  tbl_peminjaman.status = 'req')");
-$data = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas WHERE tbl_siswa.id_kelas = tbl_kelas.id_kelas AND nis = '$getid'");
+$rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_buku.judul, tbl_buku.gambar, tbl_buku.id_buku, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = tbl_siswa.nisn AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.id_anggota = '$getid' AND (tbl_peminjaman.status = 'tidak' OR  tbl_peminjaman.status = 'req')");
+$data = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas WHERE tbl_siswa.id_kelas = tbl_kelas.id_kelas AND nisn = '$getid'");
 $data = mysqli_fetch_assoc($data);
 ?>
 
@@ -33,7 +33,7 @@ $data = mysqli_fetch_assoc($data);
             <div class="card-body" style="overflow-x: scroll;">
               <ul>
                 <li>Nama : <?= $data['nama'] ?></li>
-                <li>Nis : <?= $data['nis'] ?></li>
+                <li>Nisn : <?= $data['nisn'] ?></li>
                 <li>Kelas : <?= $data['nama_kelas'] ?></li>
               </ul>
               <a href="/perpustakaan/siswa/addpinjaman" class="btn btn-primary mb-4">Tambah data Pinjaman</a>

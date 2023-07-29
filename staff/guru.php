@@ -3,7 +3,7 @@ $title = "Guru - Perpustakaan SMAN 3 Gowa";
 $active = "guru";
 include 'template/header.php';
 
-$rows = mysqli_query($con, "SELECT * FROM tbl_guru, tbl_login WHERE tbl_login.id_anggota = tbl_guru.nip");
+$rows = mysqli_query($con, "SELECT * FROM tbl_guru, tbl_login WHERE tbl_login.id_anggota = tbl_guru.nip AND tbl_guru.valid = 'true'");
 ?>
 
 
@@ -37,7 +37,6 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_guru, tbl_login WHERE tbl_login.id
                     <th class="text-white" scope="col">Jenip Kelamin</th>
                     <th class="text-white" scope="col">Email</th>
                     <th class="text-white" scope="col">Hp</th>
-                    <th class="text-white" scope="col">Alamat</th>
                     <th class="text-white" scope="col">Aksi</th>
                   </tr>
                 </thead>
@@ -51,7 +50,6 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_guru, tbl_login WHERE tbl_login.id
                       <td><?= $row['jk'] ?></td>
                       <td><?= $row['email'] ?></td>
                       <td><?= $row['hp'] ?></td>
-                      <td><?= $row['alamat'] ?></td>
                       <td>
                         <form action="" method="post">
                           <input type="hidden" value="<?= $row['nip']; ?>" name="nip">

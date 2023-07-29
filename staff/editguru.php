@@ -32,7 +32,7 @@ if (isset($_GET['nip'])) {
               <h4>Formulir</h4>
             </div>
             <div class="card-body">
-              <form action="" method="post">
+              <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="input-group mb-3">
@@ -59,6 +59,10 @@ if (isset($_GET['nip'])) {
                         <option value="Perempuan">Perempuan</option>
                       </select>
                     </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="hidden" name="gambarlama" value="<?= $row['foto'] ?>">
+                    <input type="file" class="form-control" name="gambar">
                   </div>
                   <div class="col-md-12">
                     <div class="input-group mb-3">
@@ -90,11 +94,23 @@ if (isset($_POST['update'])) {
   $hp = htmlspecialchars($_POST['hp']);
   $alamat = htmlspecialchars($_POST['alamat']);
   $password = htmlspecialchars($_POST['password']);
+  $gambarlama = htmlspecialchars($_POST['gambarlama']);
 
-  $queryStaff = "UPDATE tbl_guru SET
+  if ($_FILES['gambar']['error'] == 4) {
+    $gambar = $gambarlama;
+  } else {
+    if ($gambarlama != 'buku-default.png') {
+
+      unlink('../assets/profile/' . $gambarlama);
+    }
+    $gambar = cekSampul("profile");
+  }
+
+  $queryguru = "UPDATE tbl_guru SET
             nama = '$nama',
             alamat = '$alamat',
             hp = '$hp',
+            foto = '$gambar',
             jk = '$jk' WHERE nip = '$getnip'";
 
   if (strlen($password) > 0) {
@@ -107,7 +123,7 @@ if (isset($_POST['update'])) {
               email = '$email'  WHERE id_anggota = '$getnip'";
   }
 
-  mysqli_query($con, $queryStaff);
+  mysqli_query($con, $queryguru);
   mysqli_query($con, $queryLogin);
 
   echo mysqli_error($con);

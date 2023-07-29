@@ -3,7 +3,7 @@ require 'koneksi.php';
 
 $listbuku = mysqli_query($con, "SELECT * FROM tbl_buku ORDER BY id_buku DESC");
 
-if(isset($_GET['judul'])){
+if (isset($_GET['judul'])) {
   $judul = htmlspecialchars($_GET['judul']);
   $listbuku = mysqli_query($con, "SELECT * FROM tbl_buku WHERE judul LIKE '%$judul%' ORDER BY id_buku DESC");
 }
@@ -57,7 +57,7 @@ $row = mysqli_fetch_assoc($profile);
       <div class="d-flex justify-content-center flex-wrap">
         <?php while ($bukupopuler = mysqli_fetch_assoc($listbukupopuler)) : ?>
           <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?= $bukupopuler['judul'] ?>">
-            <a href="/perpustakaan/detailbuku?id=<?= $bukupopuler['id_buku']?>">
+            <a href="/perpustakaan/detailbuku?id=<?= $bukupopuler['id_buku'] ?>">
               <img class="img-fluid img-buku-populer rounded-2" data-aos="fade-right" data-aos-delay="0" src="./assets/buku/<?= $bukupopuler['gambar'] ?>" alt="buku-populer">
             </a>
           </div>
@@ -72,15 +72,26 @@ $row = mysqli_fetch_assoc($profile);
           <input type="text" name="judul" class="form-control" placeholder="Cari Buku...">
           <button type="submit" class="btn btn-primary ms-3">Cari</button>
         </form>
-        <div class="d-flex justify-content-center flex-wrap">
+        <div class="row">
+          <?php while ($buku = mysqli_fetch_assoc($listbuku)) : ?>
+            <div class="col-md-3 col-6">
+              <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?= $buku['judul'] ?>">
+                <a href="/perpustakaan/detailbuku?id=<?= $buku['id_buku'] ?>">
+                  <img class="img-fluid img-buku-populer rounded-2" data-aos="fade-right" data-aos-delay="0" src="./assets/buku/<?= $buku['gambar'] ?>" alt="buku-populer">
+                </a>
+              </div>
+            </div>
+          <?php endwhile; ?>
+        </div>
+        <!-- <div class="d-flex justify-content-center flex-wrap">
           <?php while ($buku = mysqli_fetch_assoc($listbuku)) : ?>
             <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?= $buku['judul'] ?>">
-              <a href="/perpustakaan/detailbuku?id=<?= $buku['id_buku']?>">
+              <a href="/perpustakaan/detailbuku?id=<?= $buku['id_buku'] ?>">
                 <img class="img-fluid img-buku-populer rounded-2" data-aos="fade-right" data-aos-delay="0" src="./assets/buku/<?= $buku['gambar'] ?>" alt="buku-populer">
               </a>
             </div>
           <?php endwhile; ?>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

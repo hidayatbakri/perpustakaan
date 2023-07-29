@@ -2,8 +2,8 @@
 $title = "Profile - Perpustakaan SMAN 3 Gowa";
 $active = "profile";
 include 'template/header.php';
-$nis = $_SESSION['id'];
-$profile = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_login, tbl_kelas WHERE tbl_siswa.nis = '$nis' AND tbl_login.id_anggota = '$nis' AND tbl_kelas.id_kelas = tbl_siswa.id_kelas");
+$nisn = $_SESSION['id'];
+$profile = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_login, tbl_kelas WHERE tbl_siswa.nisn = '$nisn' AND tbl_login.id_anggota = '$nisn' AND tbl_kelas.id_kelas = tbl_siswa.id_kelas");
 $profile = mysqli_fetch_assoc($profile);
 ?>
 
@@ -28,6 +28,9 @@ $profile = mysqli_fetch_assoc($profile);
               <h4>Data diri anda</h4>
             </div>
             <div class="card-body pt-3">
+              <div class="d-flex justify-content-center mb-3">
+                <img class="rounded" src="../assets/profile/<?= $profile['foto'] ?>" style="width: 150px; height: 180px; object-fit: cover;" alt="">
+              </div>
               <table class="table">
                 <tbody>
                   <tr>
@@ -35,8 +38,8 @@ $profile = mysqli_fetch_assoc($profile);
                     <td><?= $profile['nama']; ?></td>
                   </tr>
                   <tr>
-                    <th scope="row">Nis</th>
-                    <td><?= $profile['nis']; ?></td>
+                    <th scope="row">Nisn</th>
+                    <td><?= $profile['nisn']; ?></td>
                   </tr>
                   <tr>
                     <th scope="row">Kelas</th>

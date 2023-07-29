@@ -2,9 +2,9 @@
 $title = "Detail Rekap - Perpustakaan SMAN 3 Gowa";
 $active = "rekap";
 include 'template/header.php';
-$getnis = htmlspecialchars($_GET['id']);
-$rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.tgl_kembali, tbl_buku.judul, tbl_buku.gambar, tbl_buku.id_buku, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = '$getnis' AND tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.status = 'ya'");
-$datasiswa = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas WHERE tbl_siswa.id_kelas = tbl_kelas.id_kelas AND nis = '$getnis'");
+$getnisn = htmlspecialchars($_GET['id']);
+$rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_peminjaman.tgl_kembali, tbl_buku.judul, tbl_buku.gambar, tbl_buku.id_buku, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = '$getnisn' AND tbl_peminjaman.id_anggota = tbl_siswa.nisn AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.status = 'ya'");
+$datasiswa = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas WHERE tbl_siswa.id_kelas = tbl_kelas.id_kelas AND nisn = '$getnisn'");
 $datasiswa = mysqli_fetch_assoc($datasiswa);
 ?>
 
@@ -31,7 +31,7 @@ $datasiswa = mysqli_fetch_assoc($datasiswa);
             <div class="card-body" style="overflow-x: scroll;">
               <ul>
                 <li>Nama : <?= $datasiswa['nama'] ?></li>
-                <li>Nis : <?= $datasiswa['nis'] ?></li>
+                <li>Nisn : <?= $datasiswa['nisn'] ?></li>
                 <li>Kelas : <?= $datasiswa['nama_kelas'] ?></li>
               </ul>
               <table class="table mt-5 table-hover table-striped" id="dataTable">

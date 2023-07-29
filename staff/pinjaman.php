@@ -11,7 +11,7 @@ if (isset($_GET['getJenis'])) {
   $jenis = htmlspecialchars($_GET['getJenis']);
   if ($jenis == 'siswa') {
 
-    $rows = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_siswa.nis = tbl_peminjaman.id_anggota AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.jenis = '$jenis' AND (tbl_peminjaman.status = 'tidak' OR tbl_peminjaman.status = 'req') GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");
+    $rows = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_siswa.nisn = tbl_peminjaman.id_anggota AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND tbl_peminjaman.jenis = '$jenis' AND (tbl_peminjaman.status = 'tidak' OR tbl_peminjaman.status = 'req') GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");
   } elseif ($jenis == 'guru') {
 
     $rows = mysqli_query($con, "SELECT * FROM tbl_guru, tbl_buku, tbl_peminjaman WHERE  tbl_peminjaman.id_anggota = tbl_guru.nip AND tbl_peminjaman.id_buku = tbl_buku.id_buku  AND tbl_peminjaman.status = 'tidak' GROUP BY tbl_peminjaman.id_anggota ORDER BY tbl_peminjaman.tgl_pinjam DESC");

@@ -75,10 +75,12 @@ $rows = mysqli_query($con, "SELECT tbl_staff.nama, tbl_staff.nip, tbl_staff.alam
 if (isset($_POST['delete'])) {
   $deletenip = htmlspecialchars($_POST['nip']);
   if ($deletenip != $nip) {
-    mysqli_query($con, "DELETE FROM tbl_staff WHERE nip = '$deletenip'");
-    mysqli_query($con, "DELETE FROM tbl_login WHERE id_anggota = '$deletenip'");
-    if (mysqli_affected_rows($con) >= 0) {
-      echo "<script>
+    if ($deletenip != $securenip) {
+
+      mysqli_query($con, "DELETE FROM tbl_staff WHERE nip = '$deletenip'");
+      mysqli_query($con, "DELETE FROM tbl_login WHERE id_anggota = '$deletenip'");
+      if (mysqli_affected_rows($con) >= 0) {
+        echo "<script>
         Swal.fire({
           title: 'Berhasil menghapus data',
           confirmButtonText: 'Lanjut',
@@ -89,13 +91,22 @@ if (isset($_POST['delete'])) {
           }
         })
       </script>";
-    } else {
-      echo "<script>
+      } else {
+        echo "<script>
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Gagal menghapus data!',
         })
+      </script>";
+      }
+    } else {
+      echo "<script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Anda tidak dapat menghapus data ini!',
+      })
       </script>";
     }
   } else {
@@ -105,7 +116,7 @@ if (isset($_POST['delete'])) {
       title: 'Oops...',
       text: 'Anda tidak dapat menghapus diri anda!',
     })
-  </script>";
+    </script>";
   }
 }
 

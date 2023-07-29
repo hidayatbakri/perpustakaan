@@ -6,8 +6,8 @@ $getid = htmlspecialchars($_GET['id']);
 $getjenis = htmlspecialchars($_GET['jenis']);
 
 if ($getjenis == 'siswa') {
-  $rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_buku.judul, tbl_buku.gambar, tbl_buku.id_buku, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = '$getid' AND tbl_peminjaman.id_anggota = tbl_siswa.nis AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND (tbl_peminjaman.status = 'tidak' OR tbl_peminjaman.status = 'req')");
-  $data = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas WHERE tbl_siswa.id_kelas = tbl_kelas.id_kelas AND nis = '$getid'");
+  $rows = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_buku.judul, tbl_buku.gambar, tbl_buku.id_buku, tbl_peminjaman.tgl_pinjam, tbl_peminjaman.id_peminjaman, tbl_peminjaman.status, tbl_kelas.nama_kelas FROM tbl_siswa, tbl_kelas, tbl_buku, tbl_peminjaman WHERE tbl_peminjaman.id_anggota = '$getid' AND tbl_peminjaman.id_anggota = tbl_siswa.nisn AND tbl_peminjaman.id_buku = tbl_buku.id_buku AND tbl_siswa.id_kelas = tbl_kelas.id_kelas AND (tbl_peminjaman.status = 'tidak' OR tbl_peminjaman.status = 'req')");
+  $data = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_kelas WHERE tbl_siswa.id_kelas = tbl_kelas.id_kelas AND nisn = '$getid'");
   $data = mysqli_fetch_assoc($data);
 } elseif ($getjenis == 'guru') {
   $rows = mysqli_query($con, "SELECT * FROM tbl_guru, tbl_buku, tbl_peminjaman WHERE  tbl_peminjaman.id_anggota = '$getid' AND tbl_peminjaman.id_buku = tbl_buku.id_buku  AND tbl_peminjaman.status = 'tidak' ORDER BY tbl_peminjaman.tgl_pinjam DESC");
@@ -40,7 +40,7 @@ if ($getjenis == 'siswa') {
               <?php if ($getjenis == 'siswa') : ?>
                 <ul>
                   <li>Nama : <?= $data['nama'] ?></li>
-                  <li>Nis : <?= $data['nis'] ?></li>
+                  <li>Nisn : <?= $data['nisn'] ?></li>
                   <li>Kelas : <?= $data['nama_kelas'] ?></li>
                 </ul>
 
@@ -53,6 +53,14 @@ if ($getjenis == 'siswa') {
                 </ul>
               <?php endif; ?>
               <form action="" method="post">
+                <div class="d-flex justify-content-end mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" id="checkAll" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Centang semua
+                    </label>
+                  </div>
+                </div>
                 <table class="table mt-5 table-hover table-striped" id="dataTable">
                   <thead class="bg-primary">
                     <tr>
@@ -102,7 +110,13 @@ if ($getjenis == 'siswa') {
       </div>
   </section>
 </div>
-</div>
+
+<script>
+  $("#checkAll").click(function() {
+    $('input:checkbox').not(this).prop('checked', this.checked);
+  });
+</script>
+
 <?php include 'template/footer.php';
 
 if (isset($_POST['submit'])) {

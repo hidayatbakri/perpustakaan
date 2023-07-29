@@ -2,8 +2,8 @@
 $title = "Profile - Perpustakaan SMAN 3 Gowa";
 $active = "profile";
 include 'template/header.php';
-$getnis = $_GET['nis'];
-$profile = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_siswa.nis, tbl_siswa.alamat, tbl_siswa.jk, tbl_login.email, tbl_login.level, tbl_kelas.nama_kelas, tbl_siswa.telepon FROM tbl_siswa, tbl_login, tbl_kelas WHERE tbl_siswa.nis = '$getnis' AND tbl_login.id_anggota = '$getnis' AND tbl_siswa.id_kelas = tbl_kelas.id_kelas");
+$getnisn = $_GET['nisn'];
+$profile = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_login, tbl_kelas WHERE tbl_siswa.nisn = '$getnisn' AND tbl_login.id_anggota = '$getnisn' AND tbl_siswa.id_kelas = tbl_kelas.id_kelas");
 $profile = mysqli_fetch_assoc($profile);
 ?>
 
@@ -28,6 +28,9 @@ $profile = mysqli_fetch_assoc($profile);
               <h4>Data diri anda</h4>
             </div>
             <div class="card-body pt-3">
+              <div class="d-flex justify-content-center mb-3">
+                <img class="rounded" src="../assets/profile/<?= $profile['foto'] ?>" style="width: 150px; height: 180px; object-fit: cover;" alt="">
+              </div>
               <table class="table">
                 <tbody>
                   <tr>
@@ -35,8 +38,8 @@ $profile = mysqli_fetch_assoc($profile);
                     <td><?= $profile['nama']; ?></td>
                   </tr>
                   <tr>
-                    <th scope="row">Nis</th>
-                    <td><?= $profile['nis']; ?></td>
+                    <th scope="row">Nisn</th>
+                    <td><?= $profile['nisn']; ?></td>
                   </tr>
                   <tr>
                     <th scope="row">Email</th>
@@ -66,7 +69,7 @@ $profile = mysqli_fetch_assoc($profile);
               </table>
               <div class="d-flex justify-content-end">
                 <a href="/perpustakaan/staff/siswa" class="btn btn-light mt-5 me-3">Kembali</a>
-                <a href="/perpustakaan/staff/editsiswa?nis=<?= $getnis ?>" class="btn btn-primary mt-5">Ubah Profil</a>
+                <a href="/perpustakaan/staff/editsiswa?nisn=<?= $getnisn ?>" class="btn btn-primary mt-5">Ubah Profil</a>
               </div>
             </div>
           </div>

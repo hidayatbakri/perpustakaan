@@ -3,9 +3,9 @@ $title = "Ubah Siswa - Perpustakaan SMAN 3 Gowa";
 $active = "siswa";
 include 'template/header.php';
 
-if (isset($_GET['nis'])) {
-  $getnis = htmlspecialchars($_GET['nis']);
-  $profile = mysqli_query($con, "SELECT tbl_siswa.nama, tbl_siswa.nis, tbl_siswa.alamat, tbl_siswa.id_kelas, tbl_kelas.nama_kelas, tbl_siswa.telepon, tbl_siswa.jk, tbl_login.email, tbl_login.level FROM tbl_siswa, tbl_login, tbl_kelas WHERE tbl_siswa.nis = '$getnis' AND tbl_login.id_anggota = '$getnis' AND tbl_siswa.id_kelas = tbl_kelas.id_kelas");
+if (isset($_GET['nisn'])) {
+  $getnisn = htmlspecialchars($_GET['nisn']);
+  $profile = mysqli_query($con, "SELECT * FROM tbl_siswa, tbl_login, tbl_kelas WHERE tbl_siswa.nisn = '$getnisn' AND tbl_login.id_anggota = '$getnisn' AND tbl_siswa.id_kelas = tbl_kelas.id_kelas");
   $profile = mysqli_fetch_assoc($profile);
   $listkelas = mysqli_query($con, "SELECT * FROM tbl_kelas");
 }
@@ -33,12 +33,12 @@ if (isset($_GET['nis'])) {
               <h4>Formulir</h4>
             </div>
             <div class="card-body">
-              <form action="" method="post">
+              <form action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="nis" placeholder="Nis" value="<?= $profile['nis'] ?>" required>
-                      <input type="hidden" class="form-control form-control-lg bg-light fs-6" name="nisInp" placeholder="Nis" value="<?= $profile['nis'] ?>" required>
+                      <input type="text" class="form-control form-control-lg bg-light fs-6" name="nisn" placeholder="Nisn" value="<?= $profile['nisn'] ?>" required>
+                      <input type="hidden" class="form-control form-control-lg bg-light fs-6" name="nisnInp" placeholder="Nisn" value="<?= $profile['nisn'] ?>" required>
                     </div>
                     <div class="input-group mb-3">
                       <input type="email" class="form-control form-control-lg bg-light fs-6" name="email" placeholder="Email Address" value="<?= $profile['email'] ?>" required>
@@ -72,6 +72,10 @@ if (isset($_GET['nis'])) {
                       </select>
                     </div>
                     <div class="input-group mb-3">
+                      <input type="hidden" name="gambarlama" value="<?= $profile['foto'] ?>">
+                      <input type="file" class="form-control" name="gambar">
+                    </div>
+                    <div class="input-group mb-3">
                       <textarea name="alamat" required class="form-control bg-light fs-6" placeholder="Alamat"><?= $profile['alamat'] ?></textarea>
                     </div>
                   </div>
@@ -93,7 +97,7 @@ if (isset($_GET['nis'])) {
 <?php include 'template/footer.php';
 
 if (isset($_POST['update'])) {
-  $nisinput = htmlspecialchars($_POST['nisInp']);
+  $nisninput = htmlspecialchars($_POST['nisnInp']);
   $nama = htmlspecialchars($_POST['nama']);
   $email = htmlspecialchars($_POST['email']);
   $jk = htmlspecialchars($_POST['jk']);
@@ -101,22 +105,34 @@ if (isset($_POST['update'])) {
   $kelas = htmlspecialchars($_POST['kelas']);
   $alamat = htmlspecialchars($_POST['alamat']);
   $password = htmlspecialchars($_POST['password']);
+  $gambarlama = htmlspecialchars($_POST['gambarlama']);
+
+  if ($_FILES['gambar']['error'] == 4) {
+    $gambar = $gambarlama;
+  } else {
+    if ($gambarlama != 'buku-default.png') {
+
+      unlink('../assets/profile/' . $gambarlama);
+    }
+    $gambar = cekSampul("profile");
+  }
 
   $queryStaff = "UPDATE tbl_siswa SET
             nama = '$nama',
             alamat = '$alamat',
             telepon = '$telepon',
             id_kelas = '$kelas',
-            jk = '$jk' WHERE nis = '$nisinput'";
+            foto = '$gambar',
+            jk = '$jk' WHERE nisn = '$nisninput'";
 
   if (strlen($password) > 0) {
     $password = password_hash($password, PASSWORD_DEFAULT);
     $queryLogin = "UPDATE tbl_login SET
               email = '$email',
-              password = '$password' WHERE id_anggota = '$nisinput'";
+              password = '$password' WHERE id_anggota = '$nisninput'";
   } else {
     $queryLogin = "UPDATE tbl_login SET
-              email = '$email'  WHERE id_anggota = '$nisinput'";
+              email = '$email'  WHERE id_anggota = '$nisninput'";
   }
 
   mysqli_query($con, $queryStaff);

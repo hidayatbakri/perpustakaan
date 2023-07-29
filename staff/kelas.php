@@ -46,6 +46,7 @@ $rows = mysqli_query($con, "SELECT * FROM tbl_kelas");
                         <form action="" method="post">
                           <input type="hidden" value="<?= $row['id_kelas']; ?>" name="id">
                           <button type="submit" name="delete" onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
+                          <a href="/perpustakaan/staff/detailkelas?id=<?= $row['id_kelas'] ?>" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
                           <a href="/perpustakaan/staff/editkelas?id=<?= $row['id_kelas'] ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
                         </form>
                       </td>

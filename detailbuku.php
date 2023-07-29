@@ -45,20 +45,20 @@ $row = mysqli_fetch_assoc($profile);
       </div>
     </div>
   </nav>
-  <section class="py-5 " >
-    <div class="container" >
+  <section class="py-5 ">
+    <div class="container">
       <h3 class="mytext-primary fw-bold">Buku <?= $buku['judul'] ?></h3>
-      <div class="row mt-5" >
+      <div class="row mt-5">
         <div class="col-md-4">
           <img class="img-fluid img-buku-populer rounded-2" style="min-height: 400px !important;" src="./assets/buku/<?= $buku['gambar'] ?>" alt="buku-populer">
         </div>
         <div class="col-md-8">
-          <h5 class="text-secondary bold">Detail buku</h5>
+          <h5 class="text-secondary bold pt-3">Detail buku</h5>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Judul : <?= $buku['judul']?></li>
-            <li class="list-group-item">Penerbit : <?= $buku['penerbit']?></li>
-            <li class="list-group-item">Penulis : <?= $buku['penulis']?></li>
-            <li class="list-group-item">Tahun Terbit : <?= $buku['tahun_terbit']?></li>
+            <li class="list-group-item">Judul : <?= $buku['judul'] ?></li>
+            <li class="list-group-item">Penerbit : <?= $buku['penerbit'] ?></li>
+            <li class="list-group-item">Penulis : <?= $buku['penulis'] ?></li>
+            <li class="list-group-item">Tahun Terbit : <?= $buku['tahun_terbit'] ?></li>
             <li class="list-group-item">Telah dipinjam : <?= $total['total'] ?? '0' ?>x</li>
           </ul>
         </div>
@@ -73,14 +73,14 @@ $row = mysqli_fetch_assoc($profile);
       <!-- <div class="d-flex justify-content-center flex-wrap">
         <?php while ($bukupopuler = mysqli_fetch_assoc($listbukupopuler)) : ?>
           <div class="card card-buku border-0 m-3 position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="<?= $bukupopuler['judul'] ?>">
-            <a href="/perpustakaan/detailbuku?id=<?= $bukupopuler['id_buku']?>">
+            <a href="/perpustakaan/detailbuku?id=<?= $bukupopuler['id_buku'] ?>">
               <img class="img-fluid img-buku-populer rounded-2" data-aos="fade-right" data-aos-delay="0" src="./assets/buku/<?= $bukupopuler['gambar'] ?>" alt="buku-populer">
             </a>
           </div>
         <?php endwhile; ?>
       </div> -->
 
-      
+
     </div>
   </section>
   <footer class="bg-white py-3">

@@ -1,22 +1,28 @@
 <?php
 require '../koneksi.php';
+$pathbuku = '/perpustakaan/assets/buku/';
+
 session_start();
 if (!isset($_SESSION['login'])) {
   header("Location: /perpustakaan/login");
   exit;
 }
-$nis = $_SESSION['id'];
 
-$ceklogin = mysqli_query($con, "SELECT * FROM tbl_login WHERE id_anggota = '$nis'");
-
+$nisn = $_SESSION['id'];
+$ceklogin = mysqli_query($con, "SELECT * FROM tbl_login WHERE id_anggota = '$nisn'");
 if (mysqli_num_rows($ceklogin) != 1) {
   header("Location: /perpustakaan/login");
+  exit;
 }
 
-$pathbuku = '/perpustakaan/assets/buku/';
-$result = mysqli_query($con, "SELECT * FROM tbl_siswa WHERE nis = '$nis'");
+$cekstatus = mysqli_query($con, "SELECT * FROM tbl_siswa WHERE nisn = '$nisn'");
+$cekstatus = mysqli_fetch_assoc($cekstatus);
+if ($cekstatus['valid'] == 'false') {
+  header("Location: /perpustakaan/logout");
+  exit;
+}
 
-
+$result = mysqli_query($con, "SELECT * FROM tbl_siswa WHERE nisn = '$nisn'");
 if (mysqli_num_rows($result) === 1) {
   $staff = mysqli_fetch_assoc($result);
 }
@@ -159,7 +165,7 @@ function cekSampul($lokasi)
             </li>
             <li class="sidebar-item  <?= $active == 'keterangan' ? 'active' : ''; ?>">
               <a href="/perpustakaan/siswa/keterangan" class='sidebar-link'>
-              <i class="bi bi-postcard"></i>
+                <i class="bi bi-postcard"></i>
                 <span>Kartu Keterangan</span>
               </a>
             </li>
